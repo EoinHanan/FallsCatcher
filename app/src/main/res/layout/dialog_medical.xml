@@ -80,7 +80,7 @@
             android:text="Other please state" />
 
         <EditText
-            android:id="@+id/editText15"
+            android:id="@+id/otherText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -97,39 +97,42 @@
             android:text="Select" />
 
         <RadioButton
-            android:id="@+id/radioButton20"
+            android:id="@+id/nurseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="1" />
+
         <RadioButton
-            android:id="@+id/radioButton21"
+            android:id="@+id/careProviderButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="2" />
+
         <RadioButton
-            android:id="@+id/radioButton22"
+            android:id="@+id/doctorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="3" />
 
         <RadioButton
-            android:id="@+id/radioButton23"
+            android:id="@+id/emergencyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="4" />
+
         <RadioButton
-            android:id="@+id/radioButton24"
+            android:id="@+id/hospitalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="5" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/daysText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"

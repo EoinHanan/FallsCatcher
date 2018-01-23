@@ -12,7 +12,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="Injury suffered as a result of fall"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

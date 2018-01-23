@@ -108,8 +108,8 @@ public class AddFragment extends Fragment {
         yesInjuryButton = (Button)view.findViewById(R.id.yesInjuryButton);
         noMedicalButton = (Button)view.findViewById(R.id.noMedicalButton);
         yesMedicalButton = (Button)view.findViewById(R.id.yesMedicalButton);
-        noRelapseButton = (Button)view.findViewById(R.id.yesRelapseButton);
-        yesRelapseButton = (Button)view.findViewById(R.id.noRelapseButton);
+        noRelapseButton = (Button)view.findViewById(R.id.noRelapseButton);
+        yesRelapseButton = (Button)view.findViewById(R.id.yesRelapseButton);
 
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,7 +365,7 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[6]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_length,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
 
                     selectButton = (Button)popup.findViewById(R.id.selectButton);
@@ -393,10 +393,13 @@ public class AddFragment extends Fragment {
 
                                     buttonSelected[7] = false;
                                     exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    dialog.dismiss();
                                 }
-                                Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -441,9 +444,11 @@ public class AddFragment extends Fragment {
                                     buttonSelected[7] = true;
                                     exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                                 }
-                                Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
                             }
-                            Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -552,12 +557,12 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[12]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_help,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
 
                     help = null;
 
-                    RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.helpGroup);
+                    RadioGroup radioGroup = (RadioGroup) popup.findViewById(R.id.helpGroup);
                     radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
                     {
                         @Override
@@ -586,6 +591,8 @@ public class AddFragment extends Fragment {
 
                                 buttonSelected[12] = true;
                                 yesHelpButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                                dialog.dismiss();
                             }
                             else
                                 Toast.makeText(view.getContext(),"Please choose an option", Toast.LENGTH_SHORT).show();
@@ -625,7 +632,7 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[14]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_injury,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
                     //Get input
 
@@ -641,6 +648,8 @@ public class AddFragment extends Fragment {
 
                             buttonSelected[14] = true;
                             yesInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                            dialog.dismiss();
                         }
 
                         public String getInjury(){
@@ -803,13 +812,14 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[16]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_medical,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
 
                     selectButton = (Button)popup.findViewById(R.id.selectButton);
                     selectButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            medical = getMedical();
                             selected[6] = true;
 
                             buttonSelected[15] = false;
@@ -817,6 +827,7 @@ public class AddFragment extends Fragment {
 
                             buttonSelected[16] = true;
                             yesMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            dialog.dismiss();
                         }
                     });
                 }
@@ -825,6 +836,58 @@ public class AddFragment extends Fragment {
                     buttonSelected[16] = false;
                     yesMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
+            }
+            public String getMedical(){
+                String medical = "";
+
+                RadioButton nurseButton = (RadioButton)popup.findViewById(R.id.nurseButton);
+                RadioButton careProviderButton = (RadioButton)popup.findViewById(R.id.careProviderButton);
+                RadioButton doctorButton = (RadioButton)popup.findViewById(R.id.doctorButton);
+                RadioButton emergencyButton = (RadioButton)popup.findViewById(R.id.emergencyButton);
+                RadioButton hospitalButton = (RadioButton)popup.findViewById(R.id.hospitalButton);
+                TextView daysText = (TextView)popup.findViewById(R.id.daysText);
+                TextView commentText = (TextView)popup.findViewById(R.id.otherText);
+
+                if (nurseButton.isChecked())
+                    medical+="Nurse visit-";
+                else
+                    medical+="-";
+
+                if (careProviderButton.isChecked())
+                    medical+="Nurse visit-";
+                else
+                    medical+="-";
+
+                if (doctorButton.isChecked())
+                    medical+="Nurse visit-";
+                else
+                    medical+="-";
+
+                if (emergencyButton.isChecked())
+                    medical+="Emergency Department visit-";
+                else
+                    medical+="-";
+
+                if (hospitalButton.isChecked())
+                    medical+="Nurse visit-";
+                else
+                    medical+="-";
+
+                String days = daysText.getText().toString();
+
+                if (!days.isEmpty())
+                    medical += days + "-";
+                else
+                    medical += "0-";
+
+                String comment = commentText.getText().toString();
+
+                if (!comment.isEmpty())
+                    medical += comment;
+                else
+                    medical += "";
+
+                return medical;
             }
         });
 
@@ -854,19 +917,54 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[18]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_relapse,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
                     selectButton = (Button)popup.findViewById(R.id.selectButton);
                     selectButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             selected[7] = true;
+                            relapse = getRelapse();
 
                             buttonSelected[17] = false;
                             noRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
                             buttonSelected[18] = true;
                             yesRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            dialog.dismiss();
+                        }
+
+                        public String getRelapse(){
+                            String relapse = "";
+
+                            TextView whenRelapseText = (TextView)popup.findViewById(R.id.whenRelapseText);
+                            TextView lengthRelapseText = (TextView)popup.findViewById(R.id.lengthRelapseText);
+                            TextView symptomsRelapseText  = (TextView)popup.findViewById(R.id.symptomsRelapseText);
+                            TextView healthCareRelapseButton = (TextView)popup.findViewById(R.id.healthCareRelapseButton);
+                            TextView treatmentRelapseButton = (TextView)popup.findViewById(R.id.treatmentRelapseButton);
+
+                            if (!whenRelapseText.getText().toString().isEmpty())
+                                relapse += whenRelapseText.getText().toString() + "-";
+                            else
+                                relapse = "-";
+                            if (!lengthRelapseText.getText().toString().isEmpty())
+                                relapse += lengthRelapseText.getText().toString() + "-";
+                            else
+                                relapse = "-";
+                            if (!symptomsRelapseText.getText().toString().isEmpty())
+                                relapse += symptomsRelapseText.getText().toString() + "-";
+                            else
+                                relapse = "-";
+                            if (!healthCareRelapseButton.getText().toString().isEmpty())
+                                relapse += healthCareRelapseButton.getText().toString() + "-";
+                            else
+                                relapse = "-";
+                            if (!treatmentRelapseButton.getText().toString().isEmpty())
+                                relapse += treatmentRelapseButton.getText().toString() + "-";
+                            else
+                                relapse = "";
+
+                            return relapse;
                         }
                     });
                 }
@@ -876,6 +974,8 @@ public class AddFragment extends Fragment {
                     yesRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 }
             }
+
+
         });
 
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
@@ -943,6 +1043,8 @@ public class AddFragment extends Fragment {
     }
 
     public void clearFall(){
+
+        getFragmentManager().beginTransaction().detach(this).attach(this).commit();
 //        Fragment frg = null;
 //        frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
 //        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -957,5 +1059,4 @@ public class AddFragment extends Fragment {
         String dateString = dateFormat.format(currentDate);
         return dateString;
     }
-
 }

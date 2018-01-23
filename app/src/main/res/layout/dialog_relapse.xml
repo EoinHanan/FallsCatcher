@@ -61,7 +61,7 @@
             android:text="Did you visit a healthcare proffessional?" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/lengthRelapseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -70,7 +70,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/symptomsRelapseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -79,7 +79,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/healthCareRelapseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -88,7 +88,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/whenRelapseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
@@ -97,7 +97,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/treatmentRelapseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
