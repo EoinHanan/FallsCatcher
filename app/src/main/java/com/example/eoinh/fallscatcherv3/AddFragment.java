@@ -122,6 +122,7 @@ public class AddFragment extends Fragment {
                 }
 
                 if (allValid){
+                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
                     db.addFall(fall);
                     clearFall();
@@ -190,7 +191,6 @@ public class AddFragment extends Fragment {
                             buttonSelected[1] = true;
                             selectDateButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
-                            date = getCurrentDate();
                             dialog.dismiss();
                         }
                     });
@@ -337,7 +337,6 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!buttonSelected[5]) {
-
 
                     lengthStatus = "unknown";
                     lengthOfLie = -1;
