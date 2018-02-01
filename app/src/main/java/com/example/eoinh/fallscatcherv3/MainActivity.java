@@ -1,8 +1,12 @@
 package com.example.eoinh.fallscatcherv3;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,6 +25,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    NotificationCompat.Builder notification;
+    private static final int uniqueID = 334;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -142,5 +148,22 @@ public class MainActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
+    }
+
+    public void setNotification(){
+        notification = new NotificationCompat.Builder(this, "Channel id");
+        notification.setAutoCancel(true);
+
+        notification.setSmallIcon(R.drawable.ic_launcher_foreground);
+        notification.setTicker("This is the ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Here is the title");
+        notification.setContentText("I am the body of the text in the notification");
+
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqueID, notification.build());
     }
 }
