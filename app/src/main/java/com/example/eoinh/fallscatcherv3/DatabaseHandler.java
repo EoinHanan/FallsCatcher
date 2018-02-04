@@ -33,6 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Column_Help= "help";
     private static final String Column_Relapse= "relapse";
     private static final String Column_Comment= "comment";
+    private static final String Column_Sync= "sync";
 
     private static final String Table_User = "user";
     //Patient ID already intialised
@@ -41,18 +42,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Column_NotificationMinute = "notificationMinute";
     private static final String Column_NotificationHour = "notificationHour";
 
-
-
-
     public DatabaseHandler(Context context, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
         super(context, databaseName, factory, databaseVersion, errorHandler);
     }
-
-
-
-
-
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -70,7 +62,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Column_LengthStatus + " TEXT, " +
             Column_Help + " TEXT, " +
             Column_Relapse + " TEXT, " +
-            Column_Comment + " TEXT " +
+            Column_Comment + " TEXT, " +
+            Column_Comment + " INTEGER " +
             ");";
         sqLiteDatabase.execSQL(query);
 
@@ -105,12 +98,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Column_Help, fall.getHelp());
         values.put(Column_Relapse, fall.getRelapse());
         values.put(Column_Comment, fall.getComment());
-
-
+        values.put(Column_Sync, 0);
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(Table_Fall, null, values);
-        Log.d("Added", "Fall added");
         db.close();
     }
 
@@ -127,9 +118,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Column_PatientID, fall.getPatientID());
         values.put(Column_Date, fall.getDate());
-        values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_FallID,old);
+        values.put(Column_Time, fall.getTime());
+        values.put(Column_TimeStatus, fall.getTimeStatus());
+        values.put(Column_Location, fall.getLocation());
+        values.put(Column_Cause, fall.getCause());
+        values.put(Column_Injury, fall.getInjury());
+        values.put(Column_LengthOfLie, fall.getLengthOfLie());
+        values.put(Column_LengthStatus, fall.getLengthStatus());
+        values.put(Column_Medical, fall.getMedical());
+        values.put(Column_Help, fall.getHelp());
+        values.put(Column_Relapse, fall.getRelapse());
+        values.put(Column_Comment, fall.getComment());
         sqLiteDatabase.insert(Table_Fall, null, values);
     }
 
@@ -218,7 +217,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 falls.add(fall);
             }while(cursor.moveToNext());
         }
-        Log.d("Returning", "Database Log" + falls);
+
+        return falls;
+    }
+
+    public ArrayList<Fall> getUnSyncedFalls(){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ArrayList<Fall> falls = new ArrayList<>();
+        String query = "Select * from " + Table_Fall + " where sync = 0";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        if (cursor.moveToFirst()){
+            do {
+                int fallID = cursor.getInt(cursor.getColumnIndex(Column_FallID));
+                int patientID = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
+                String date  = cursor.getString(cursor.getColumnIndex(Column_Date));
+                String timeStatus  = cursor.getString(cursor.getColumnIndex(Column_TimeStatus));
+                String time  = cursor.getString(cursor.getColumnIndex(Column_Time));
+                String location  = cursor.getString(cursor.getColumnIndex(Column_Location));
+                String cause  = cursor.getString(cursor.getColumnIndex(Column_Cause));
+                String injury = cursor.getString(cursor.getColumnIndex(Column_Injury));
+                int lengthOfLie  = cursor.getInt(cursor.getColumnIndex(Column_LengthOfLie));
+                String lengthStatus = cursor.getString(cursor.getColumnIndex(Column_LengthStatus));
+                String help = cursor.getString(cursor.getColumnIndex(Column_Help));
+                String relapse = cursor.getString(cursor.getColumnIndex(Column_Relapse));
+                String comment = cursor.getString(cursor.getColumnIndex(Column_Comment));
+                String medical  = cursor.getString(cursor.getColumnIndex(Column_Medical));
+
+                Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
+
+                falls.add(fall);
+            }while(cursor.moveToNext());
+        }
+
+        query = "Update " + Table_Fall +
+                "Set " + Column_Sync + " = 1 " +
+                "Where " + Column_Sync + " = 0";
+        sqLiteDatabase.execSQL(query);
 
         return falls;
     }

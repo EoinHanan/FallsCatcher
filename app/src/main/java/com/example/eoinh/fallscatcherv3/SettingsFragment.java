@@ -120,21 +120,6 @@ public class SettingsFragment extends Fragment {
             Log.d("relapse", fall.getRelapse());
             Log.d("comment", fall.getComment());
 
-//            params.put("localID", "20");
-//            params.put("patientID", "20");
-//            params.put("date", "20");
-//            params.put("timeStatus", "20");
-//            params.put("time", "20");
-//            params.put("location", "20");
-//            params.put("cause", "20");
-//            params.put("injury", "20");
-//            params.put("lengthOfLie", "20");
-//            params.put("lengthStatus", "20");
-//            params.put("medical", "20");
-//            params.put("help", "20");
-//            params.put("relapse", "20");
-//            params.put("comment", "20");
-
             PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_FALL, params, CODE_POST_REQUEST);
             request.execute();
         }

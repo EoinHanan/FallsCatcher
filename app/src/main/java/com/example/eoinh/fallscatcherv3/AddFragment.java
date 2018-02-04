@@ -78,7 +78,7 @@ public class AddFragment extends Fragment {
         patientID = db.getPatientID();
 
         builder = new AlertDialog.Builder(view.getContext());
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
 
         selected = new boolean[9];
@@ -128,20 +128,20 @@ public class AddFragment extends Fragment {
                     db.addFall(fall);
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
-//                    Log.d("FallAdded",
-//                            "PID: " + patientID +
-//                                    "\nDate: " + date +
-//                                    "\nTime Status: " +timeStatus +
-//                                    "\nlocation: "+ location +
-//                                    "\ncause: " + cause +
-//                                    "\ntime: " + time +
-//                                    "\ninjury: " + injury +
-//                                    "\nlengthOfLie: " + lengthOfLie +
-//                                    "\nlengthStatus: " + lengthStatus +
-//                                    "\nmedical: " + medical +
-//                                    "\nhelp" + help +
-//                                    "\nrelapse" + relapse +
-//                                    "\ncomment: " + comment);
+                    Log.d("FallAdded",
+                            "PID: " + patientID +
+                                    "\nDate: " + date +
+                                    "\nTime Status: " +timeStatus +
+                                    "\nlocation: "+ location +
+                                    "\ncause: " + cause +
+                                    "\ntime: " + time +
+                                    "\ninjury: " + injury +
+                                    "\nlengthOfLie: " + lengthOfLie +
+                                    "\nlengthStatus: " + lengthStatus +
+                                    "\nmedical: " + medical +
+                                    "\nhelp" + help +
+                                    "\nrelapse" + relapse +
+                                    "\ncomment: " + comment);
                 }
                 else
                 {
@@ -193,7 +193,7 @@ public class AddFragment extends Fragment {
                     selectButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            date = datepicker.getDayOfMonth() + "/" + (datepicker.getMonth() + 1) + "/" + datepicker.getYear();
+                            date =   datepicker.getYear() + "/" + (datepicker.getMonth() + 1) + "/" + datepicker.getDayOfMonth();
 
                             Toast.makeText(view.getContext(),"Date set at " + date, Toast.LENGTH_SHORT).show();
 
@@ -266,7 +266,7 @@ public class AddFragment extends Fragment {
                                 int hours = Integer.parseInt(hoursText.getText().toString());
                                 int minutes = Integer.parseInt(minutesText.getText().toString());
                                 if (hours > 0 && hours < 23 && minutes > 0 && minutes < 59) {
-                                    time = "" + hoursText.getText().toString() + minutesText.getText().toString();
+                                    time = "" + hoursText.getText().toString() + ":" + minutesText.getText().toString() + ":00";
                                     timeStatus = "estimate";
                                     selected[1] = true;
 
@@ -318,7 +318,7 @@ public class AddFragment extends Fragment {
                                 int hours = Integer.parseInt(hoursText.getText().toString());
                                 int minutes = Integer.parseInt(minutesText.getText().toString());
                                 if (hours > 0 && hours < 23 && minutes > 0 && minutes < 59) {
-                                    time = "" + hoursText.getText().toString() + minutesText.getText().toString();
+                                    time = "" + hoursText.getText().toString() + ":" + minutesText.getText().toString() + ":00";
                                     timeStatus = "exact";
                                     selected[1] = true;
 
@@ -365,6 +365,8 @@ public class AddFragment extends Fragment {
 
                     buttonSelected[7] = false;
                     exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                    dialog.dismiss();
                 }
                 else{
                     selected[2] = false;
@@ -407,6 +409,7 @@ public class AddFragment extends Fragment {
 
                                     buttonSelected[7] = false;
                                     exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
                                     dialog.dismiss();
                                 }
                                 else
@@ -430,7 +433,7 @@ public class AddFragment extends Fragment {
                 if (!buttonSelected[7]) {
                     popup = getLayoutInflater().inflate(R.layout.dialog_length,null);
                     builder.setView(popup);
-                    AlertDialog dialog = builder.create();
+                    final AlertDialog dialog = builder.create();
                     dialog.show();
 
                     selectButton = (Button)popup.findViewById(R.id.selectButton);
@@ -444,7 +447,7 @@ public class AddFragment extends Fragment {
                             if (hoursText.getText().toString().matches(pattern) && minutesText.getText().toString().matches(pattern)) {
                                 int hours = Integer.parseInt(hoursText.getText().toString());
                                 int minutes = Integer.parseInt(minutesText.getText().toString());
-                                if (hours > 0 && minutes > 0) {
+                                if (hours >= 0 && minutes > 0) {
                                     lengthOfLie = (hours * 60) + minutes;
                                     lengthStatus = "exact";
                                     selected[2] = true;
@@ -457,6 +460,8 @@ public class AddFragment extends Fragment {
 
                                     buttonSelected[7] = true;
                                     exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                                    dialog.dismiss();
                                 }
                                 else
                                     Toast.makeText(view.getContext(),"Invalid values entered", Toast.LENGTH_SHORT).show();
@@ -1068,7 +1073,7 @@ public class AddFragment extends Fragment {
     }
 
     public String getCurrentDate(){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date currentDate = new Date();
         String dateString = dateFormat.format(currentDate);
         return dateString;
