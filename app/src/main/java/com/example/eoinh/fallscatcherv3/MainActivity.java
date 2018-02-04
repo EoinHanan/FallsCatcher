@@ -23,7 +23,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Date;
+
+public class MainActivity extends AppCompatActivity  {
 
     NotificationCompat.Builder notification;
     private static final int uniqueID = 334;
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setNotification(){
+    public void setNotification(String time){
         notification = new NotificationCompat.Builder(this, "Channel id");
         notification.setAutoCancel(true);
 
@@ -165,5 +167,11 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqueID, notification.build());
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
     }
 }

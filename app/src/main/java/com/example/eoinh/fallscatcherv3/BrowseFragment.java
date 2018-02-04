@@ -1,8 +1,5 @@
 package com.example.eoinh.fallscatcherv3;
 
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -72,6 +69,13 @@ public class BrowseFragment extends Fragment {
             TextView timeText = (TextView)view.findViewById(R.id.timeText);
             Button editButton = (Button) view.findViewById(R.id.editButton);
 
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
             dateText.setText(falls.get(i).getDate());
             timeText.setText(falls.get(i).getTime());
 
@@ -80,11 +84,19 @@ public class BrowseFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
+            getFragmentManager().beginTransaction().detach(this).attach(this).commitAllowingStateLoss();
         }
     }
+
+
 
 }

@@ -41,14 +41,16 @@ public class Fall {
         this.patientID = patientID;
         this.date = date;
         this.timeStatus = timeStatus;
+        this.time= time;
         this.location = location;
         this.cause = cause;
-        this.time= time;
         this.injury = injury;
         this.lengthOfLie = lengthOfLie;
         this.lengthStatus = lengthStatus;
         this.medical = medical;
         this.help = help;
+        this.relapse = relapse;
+        this.comment = comment;
     }
     public Fall(int fallID, int patientID, String date, String timeStatus, String location, String cause, String time, String injury, int lengthOfLie, String lengthStatus, String medical, String help, String relapse, String comment ){
         this.fallID = fallID;
@@ -63,6 +65,8 @@ public class Fall {
         this.lengthStatus = lengthStatus;
         this.medical = medical;
         this.help = help;
+        this.relapse = relapse;
+        this.comment = comment;
     }
     public int getPatientID(){
         return patientID;
@@ -74,7 +78,8 @@ public class Fall {
         return date;
     }
     public String getTimeStatus(){
-        return timeStatus;
+//        return timeStatus;
+        return "Time Status";
     }
     public String getTime(){
         return time;

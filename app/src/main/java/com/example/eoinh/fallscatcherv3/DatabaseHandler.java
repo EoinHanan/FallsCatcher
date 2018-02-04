@@ -23,8 +23,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Column_FallID = "fallID";
     private static final String Column_Date = "date";
     private static final String Column_TimeStatus = "timeStatus";
-    private static final String Column_InjuryCaused = "injuryCaused";
-    private static final String Column_MedicalNeeded = "medicalNeeded";
     private static final String Column_Location = "location";
     private static final String Column_Cause = "cause";
     private static final String Column_Time= "time";
@@ -95,9 +93,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addFall(Fall fall){
         ContentValues values = new ContentValues();
         values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_Date, fall.getDate().toString());
-        values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_PatientID, fall.getPatientID());
+        values.put(Column_Date, fall.getDate());
+        values.put(Column_Time, fall.getTime());
+        values.put(Column_TimeStatus, fall.getTimeStatus());
+        values.put(Column_Location, fall.getLocation());
+        values.put(Column_Cause, fall.getCause());
+        values.put(Column_Injury, fall.getInjury());
+        values.put(Column_LengthOfLie, fall.getLengthOfLie());
+        values.put(Column_LengthStatus, fall.getLengthStatus());
+        values.put(Column_Medical, fall.getMedical());
+        values.put(Column_Help, fall.getHelp());
+        values.put(Column_Relapse, fall.getRelapse());
+        values.put(Column_Comment, fall.getComment());
+
+
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(Table_Fall, null, values);
@@ -212,5 +221,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d("Returning", "Database Log" + falls);
 
         return falls;
+    }
+    public void clearAll() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String query = "DELETE FROM `fall` WHERE 1";
+
+        sqLiteDatabase.execSQL(query);
     }
 }

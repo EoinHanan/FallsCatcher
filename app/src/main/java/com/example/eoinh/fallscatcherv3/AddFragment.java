@@ -74,6 +74,7 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_add, container, false);
         db = new DatabaseHandler(getActivity(), null,null);
+
         patientID = db.getPatientID();
 
         builder = new AlertDialog.Builder(view.getContext());
@@ -122,11 +123,25 @@ public class AddFragment extends Fragment {
                 }
 
                 if (allValid){
-                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
                     db.addFall(fall);
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
+//                    Log.d("FallAdded",
+//                            "PID: " + patientID +
+//                                    "\nDate: " + date +
+//                                    "\nTime Status: " +timeStatus +
+//                                    "\nlocation: "+ location +
+//                                    "\ncause: " + cause +
+//                                    "\ntime: " + time +
+//                                    "\ninjury: " + injury +
+//                                    "\nlengthOfLie: " + lengthOfLie +
+//                                    "\nlengthStatus: " + lengthStatus +
+//                                    "\nmedical: " + medical +
+//                                    "\nhelp" + help +
+//                                    "\nrelapse" + relapse +
+//                                    "\ncomment: " + comment);
                 }
                 else
                 {

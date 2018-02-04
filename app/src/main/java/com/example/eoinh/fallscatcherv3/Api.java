@@ -5,7 +5,7 @@ package com.example.eoinh.fallscatcherv3;
  */
 
 public class Api {
-    private static final String ROOT_URL = "http://10.52.2.175/FallsApi/v1/Api.php?apicall=";
+    private static final String ROOT_URL = "http://10.52.2.72/FallsApi/v1/Api.php?apicall=";
 
     public static final String URL_CREATE_FALL = ROOT_URL + "createfall";
     public static final String URL_READ_FALLS = ROOT_URL + "getfalls";
