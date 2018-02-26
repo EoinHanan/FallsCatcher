@@ -31,6 +31,8 @@ public class BrowseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_browse, container, false);
 
         db = new DatabaseHandler(getActivity(), null,null);
+//        db.fix();
+//        db.clearAll();
         falls = db.getFalls();
 
         CustomAdapter customAdapter = new CustomAdapter();
@@ -38,11 +40,8 @@ public class BrowseFragment extends Fragment {
 
         fallsList.setAdapter(customAdapter);
 
-
         return view;
     }
-
-
 
     class CustomAdapter extends BaseAdapter{
 
@@ -96,7 +95,4 @@ public class BrowseFragment extends Fragment {
             getFragmentManager().beginTransaction().detach(this).attach(this).commitAllowingStateLoss();
         }
     }
-
-
-
 }

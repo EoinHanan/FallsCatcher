@@ -126,22 +126,23 @@ public class AddFragment extends Fragment {
 //                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
                     db.addFall(fall);
+                    Toast.makeText(view.getContext(),"Number of falls " + db.getFalls().size(), Toast.LENGTH_SHORT).show();
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
-                    Log.d("FallAdded",
-                            "PID: " + patientID +
-                                    "\nDate: " + date +
-                                    "\nTime Status: " +timeStatus +
-                                    "\nlocation: "+ location +
-                                    "\ncause: " + cause +
-                                    "\ntime: " + time +
-                                    "\ninjury: " + injury +
-                                    "\nlengthOfLie: " + lengthOfLie +
-                                    "\nlengthStatus: " + lengthStatus +
-                                    "\nmedical: " + medical +
-                                    "\nhelp" + help +
-                                    "\nrelapse" + relapse +
-                                    "\ncomment: " + comment);
+//                    Log.d("FallAdded",
+//                            "PID: " + patientID +
+//                                    "\nDate: " + date +
+//                                    "\nTime Status: " +timeStatus +
+//                                    "\nlocation: "+ location +
+//                                    "\ncause: " + cause +
+//                                    "\ntime: " + time +
+//                                    "\ninjury: " + injury +
+//                                    "\nlengthOfLie: " + lengthOfLie +
+//                                    "\nlengthStatus: " + lengthStatus +
+//                                    "\nmedical: " + medical +
+//                                    "\nhelp" + help +
+//                                    "\nrelapse" + relapse +
+//                                    "\ncomment: " + comment);
                 }
                 else
                 {

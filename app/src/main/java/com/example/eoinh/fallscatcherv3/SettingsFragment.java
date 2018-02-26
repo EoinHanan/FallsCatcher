@@ -86,24 +86,41 @@ public class SettingsFragment extends Fragment {
 
         ArrayList <Fall> falls = db.getFalls();
 
+        //Toast.makeText(view.getContext(),"Now syncing", Toast.LENGTH_SHORT).show();
+
         for (int i =0; i < falls.size(); i++) {
             HashMap<String, String> params = new HashMap<>();
             Fall fall = falls.get(i);
 
-            params.put("localID", String.valueOf(fall.getFallID()));
-            params.put("patientID", String.valueOf(fall.getPatientID()));
-            params.put("date", fall.getDate());
-            params.put("timeStatus", fall.getTimeStatus());
-            params.put("time", fall.getTime());
-            params.put("location", fall.getLocation());
-            params.put("cause", fall.getCause());
-            params.put("injury", fall.getInjury());
-            params.put("lengthOfLie", String.valueOf(fall.getLengthOfLie()));
-            params.put("lengthStatus", fall.getLengthStatus());
-            params.put("medical", fall.getMedical());
-            params.put("help", fall.getHelp());
-            params.put("relapse", fall.getRelapse());
-            params.put("comment", fall.getComment());
+            params.put("localID", "1");
+            params.put("patientID", "1");
+            params.put("date", "");
+            params.put("timeStatus", "");
+            params.put("time", "");
+            params.put("location", "");
+            params.put("cause", "");
+            params.put("injury", "");
+            params.put("lengthOfLie", "-1");
+            params.put("lengthStatus", "");
+            params.put("medical", "");
+            params.put("help", "");
+            params.put("relapse", "");
+            params.put("comment", "");
+
+//            params.put("localID", String.valueOf(fall.getFallID()));
+//            params.put("patientID", String.valueOf(fall.getPatientID()));
+//            params.put("date", fall.getDate());
+//            params.put("timeStatus", fall.getTimeStatus());
+//            params.put("time", fall.getTime());
+//            params.put("location", fall.getLocation());
+//            params.put("cause", fall.getCause());
+//            params.put("injury", fall.getInjury());
+//            params.put("lengthOfLie", String.valueOf(fall.getLengthOfLie()));
+//            params.put("lengthStatus", fall.getLengthStatus());
+//            params.put("medical", fall.getMedical());
+//            params.put("help", fall.getHelp());
+//            params.put("relapse", fall.getRelapse());
+//            params.put("comment", fall.getComment());
 
             Log.d("localID", String.valueOf(fall.getFallID()));
             Log.d("patientID", String.valueOf(fall.getPatientID()));
@@ -151,10 +168,10 @@ public class SettingsFragment extends Fragment {
             super.onPostExecute(s);
 //            progressBar.setVisibility(GONE);
             try {
+                Log.i("tagconvertstr", "["+s+"]");
                 JSONObject object = new JSONObject(s);
                 if (!object.getBoolean("error")) {
                     Toast.makeText(getActivity().getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

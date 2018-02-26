@@ -41,16 +41,16 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/current"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/current" />
 
                 <Button
                     android:id="@+id/selectDateButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/select"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/select" />
 
             </LinearLayout>
 
@@ -71,26 +71,26 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/colorPrimary"
                     android:text="@string/unknown"
-                    android:textSize="12sp"
-                    android:background="@color/colorPrimary"/>
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/estimateFallTimeButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/colorPrimary"
                     android:text="@string/estimate"
-                    android:textSize="14sp"
-                    android:background="@color/colorPrimary"/>
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/exactFallTimeButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/exact"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/exact" />
 
             </LinearLayout>
 
@@ -111,26 +111,26 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/colorPrimary"
                     android:text="@string/unknown"
-                    android:textSize="12sp"
-                    android:background="@color/colorPrimary"/>
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/estimateLengthButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/colorPrimary"
                     android:text="@string/estimate"
-                    android:textSize="14sp"
-                    android:background="@color/colorPrimary"/>
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/exactLengthButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/exact"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/exact" />
 
             </LinearLayout>
 
@@ -151,9 +151,9 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@color/colorPrimary"
                     android:text="@string/inside_home"
-                    android:textSize="12sp"
-                    android:background="@color/colorPrimary"/>
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/outsideHomeButton"
@@ -169,8 +169,8 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/away_from_home"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/away_from_home" />
 
             </LinearLayout>
 
@@ -192,16 +192,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/no"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/no" />
 
                 <Button
                     android:id="@+id/yesHelpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/yes"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/yes" />
 
             </LinearLayout>
 
@@ -222,16 +222,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/no"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/no" />
 
                 <Button
                     android:id="@+id/yesInjuryButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/yes"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/yes" />
 
             </LinearLayout>
 
@@ -252,16 +252,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/no"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/no" />
 
                 <Button
                     android:id="@+id/yesMedicalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/yes"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/yes" />
 
             </LinearLayout>
 
@@ -282,16 +282,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/no"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/no" />
 
                 <Button
                     android:id="@+id/yesRelapseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/yes"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/colorPrimary"
+                    android:text="@string/yes" />
 
             </LinearLayout>
 
@@ -302,100 +302,108 @@
                 android:text="@string/presumed_cause_of_fall" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/radioGroup" >
+                android:layout_height="match_parent">
 
                 <RadioButton
                     android:id="@+id/radioButton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/i_m_not_sure"/>
+                    android:text="@string/i_m_not_sure" />
+
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/poor_balance"/>
+                    android:text="@string/poor_balance" />
+
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/weak_legs_or_legs_gave_way"/>
+                    android:text="@string/weak_legs_or_legs_gave_way" />
+
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/not_using_a_walking_aid_incorrectly_using_a_walking_aid_or_using_wrong_walking_aid"
-                    />
+                    android:text="@string/not_using_a_walking_aid_incorrectly_using_a_walking_aid_or_using_wrong_walking_aid" />
+
                 <RadioButton
                     android:id="@+id/radioButton5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/tripped_or_slipped"
-                    />
+                    android:text="@string/tripped_or_slipped" />
+
                 <RadioButton
                     android:id="@+id/radioButton6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/transfer_from_surface_to_surface_went_wrong"
-                    />
+                    android:text="@string/transfer_from_surface_to_surface_went_wrong" />
+
                 <RadioButton
                     android:id="@+id/radioButton7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/not_paying_attention_or_getting_distracted"
-                    />
+                    android:text="@string/not_paying_attention_or_getting_distracted" />
+
                 <RadioButton
                     android:id="@+id/radioButton8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/miscalculated_a_distance_under_or_overreaching"
-                    />
+                    android:text="@string/miscalculated_a_distance_under_or_overreaching" />
+
                 <RadioButton
                     android:id="@+id/radioButton9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/another_medical_problem_unrelated_to_ms"
-                    />
+                    android:text="@string/another_medical_problem_unrelated_to_ms" />
+
                 <RadioButton
                     android:id="@+id/radioButton10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/doing_something_risky" />
+
                 <RadioButton
                     android:id="@+id/radioButton11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/weather_ice_rain_snow_or_wind" />
+
                 <RadioButton
                     android:id="@+id/radioButton12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/poor_vision_didnt_see_an_obstacle" />
+
                 <RadioButton
                     android:id="@+id/radioButton13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/felt_dizzy_or_faint" />
+
                 <RadioButton
                     android:id="@+id/radioButton14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/overheated_too_hot" />
+
                 <RadioButton
                     android:id="@+id/radioButton15"
                     android:layout_width="wrap_content"

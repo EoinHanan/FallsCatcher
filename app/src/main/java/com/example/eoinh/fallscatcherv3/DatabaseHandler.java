@@ -10,9 +10,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by EoinH on 04/01/2018.
- */
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int databaseVersion = 1;
@@ -63,7 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Column_Help + " TEXT, " +
             Column_Relapse + " TEXT, " +
             Column_Comment + " TEXT, " +
-            Column_Comment + " INTEGER " +
+            Column_Sync + " INTEGER " +
             ");";
         sqLiteDatabase.execSQL(query);
 
@@ -79,6 +76,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Table_Fall);
+        onCreate(sqLiteDatabase);
+    }
+
+    public void fix(){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Table_Fall);
         onCreate(sqLiteDatabase);
     }
@@ -103,6 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.insert(Table_Fall, null, values);
         db.close();
+        Log.d("Fall added", "True");
     }
 
     public void deleteFall(int id){
@@ -211,8 +215,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String relapse = cursor.getString(cursor.getColumnIndex(Column_Relapse));
                 String comment = cursor.getString(cursor.getColumnIndex(Column_Comment));
                 String medical  = cursor.getString(cursor.getColumnIndex(Column_Medical));
+                boolean sync  = (cursor.getString(cursor.getColumnIndex(Column_Sync))).matches("1");
 
-                Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
+                Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment,sync);
 
                 falls.add(fall);
             }while(cursor.moveToNext());
