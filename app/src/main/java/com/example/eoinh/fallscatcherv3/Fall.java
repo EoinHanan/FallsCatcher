@@ -22,7 +22,7 @@ public class Fall {
     private String help;
     private String relapse;
     private String comment;
-    private boolean sync;
+    private int sync;
 
     public Fall(int patientID, String date, String timeStatus, String location, String cause){
         this.patientID = patientID;
@@ -68,11 +68,11 @@ public class Fall {
         this.help = help;
         this.relapse = relapse;
         this.comment = comment;
-        this.sync = false;
+        this.sync = 1;
     }
     public Fall(int fallID, int patientID, String date, String timeStatus, String location,
                 String cause, String time, String injury, int lengthOfLie, String lengthStatus,
-                String medical, String help, String relapse, String comment, boolean sync){
+                String medical, String help, String relapse, String comment, int sync){
         this.fallID = fallID;
         this.patientID = patientID;
         this.date = date;
@@ -129,7 +129,7 @@ public class Fall {
     public String getComment(){
         return comment;
     }
-    public boolean getSync(){
+    public int getSync(){
         return sync;
     }
 }

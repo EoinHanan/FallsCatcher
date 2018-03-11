@@ -101,7 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Column_Help, fall.getHelp());
         values.put(Column_Relapse, fall.getRelapse());
         values.put(Column_Comment, fall.getComment());
-        values.put(Column_Sync, 0);
+        values.put(Column_Sync, 1);
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(Table_Fall, null, values);
@@ -109,15 +109,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d("Fall added", "True");
     }
 
-    public void deleteFall(int id){
+    public void deleteLocalFall(int id){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + Table_Fall + " WHERE " + Column_FallID + " = " + id);
+        db.execSQL("Update " + Table_Fall + " set " + Column_Sync + " = 3 where " + Column_FallID + " = " + id);
+        db.close();
+    }
+
+    public void clearDeletedFalls(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + Table_Fall + " WHERE " + Column_Sync + " = 3");
         db.close();
     }
 
     public void editFall( int old, Fall fall){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("Delete from " + Table_Fall + " where " + Column_FallID + " = " + old);
 
         ContentValues values = new ContentValues();
         values.put(Column_PatientID, fall.getPatientID());
@@ -133,12 +138,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Column_Help, fall.getHelp());
         values.put(Column_Relapse, fall.getRelapse());
         values.put(Column_Comment, fall.getComment());
-        sqLiteDatabase.insert(Table_Fall, null, values);
+        values.put(Column_Comment, 2);
+
+        sqLiteDatabase.update(Table_Fall, values, "_id="+old, null);
     }
 
     public void editUser(User user){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("Delete from " + Table_User + " where 1");
 
         ContentValues values = new ContentValues();
         values.put(Column_PatientID, user.getUserID());
@@ -147,7 +153,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Column_NotificationMinute, user.getNotificationMinute());
         values.put(Column_NotificationHour, user.getNotificationHour());
 
-        sqLiteDatabase.insert(Table_Fall, null, values);
+        sqLiteDatabase.update(Table_User, values, "_id="+user.getUserID(), null);
     }
 
     public int getPatientID(){
@@ -215,7 +221,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String relapse = cursor.getString(cursor.getColumnIndex(Column_Relapse));
                 String comment = cursor.getString(cursor.getColumnIndex(Column_Comment));
                 String medical  = cursor.getString(cursor.getColumnIndex(Column_Medical));
-                boolean sync  = (cursor.getString(cursor.getColumnIndex(Column_Sync))).matches("1");
+                int sync  = cursor.getInt(cursor.getColumnIndex(Column_Sync));
 
                 Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment,sync);
 
@@ -226,10 +232,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return falls;
     }
 
-    public ArrayList<Fall> getUnSyncedFalls(){
+    public ArrayList<Fall> getFallsBySyncStatus(int status){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ArrayList<Fall> falls = new ArrayList<>();
-        String query = "Select * from " + Table_Fall + " where sync = 0";
+        String query = "Select * from " + Table_Fall + " where sync = " + status;
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         cursor.moveToFirst();
 
@@ -255,18 +261,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 falls.add(fall);
             }while(cursor.moveToNext());
         }
-
-        query = "Update " + Table_Fall +
-                "Set " + Column_Sync + " = 1 " +
-                "Where " + Column_Sync + " = 0";
-        sqLiteDatabase.execSQL(query);
-
         return falls;
     }
+
+
+    public void newFallsFromCentral(ArrayList<Fall> falls){
+        //To Do
+    }
+
+
+    public void updateFallsFromCentral(ArrayList<Fall> falls){
+        //To Do
+    }
+
+    public void deleteFallsFromCentral(ArrayList<Fall> falls){
+        //To Do
+    }
+
     public void clearAll() {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String query = "DELETE FROM `fall` WHERE 1";
+        sqLiteDatabase.execSQL(query);
+    }
 
+    public void setSynced(int sync) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String query = "UPDATE " + Table_Fall + " set " + Column_Sync + " = 0 WHERE " + sync;
         sqLiteDatabase.execSQL(query);
     }
 }
