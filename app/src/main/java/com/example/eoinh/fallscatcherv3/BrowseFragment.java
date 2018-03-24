@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class BrowseFragment extends Fragment {
     private TextView text;
     private DatabaseHandler db;
-    private ArrayList<Fall> falls;
+    private ArrayList<LoggedFall> loggedFalls;
     private ListView fallsList;
 
     public BrowseFragment() {
@@ -33,7 +33,7 @@ public class BrowseFragment extends Fragment {
         db = new DatabaseHandler(getActivity(), null,null);
 //        db.fix();
 //        db.clearAll();
-        falls = db.getFalls();
+        loggedFalls = db.getFalls();
 
         CustomAdapter customAdapter = new CustomAdapter();
         fallsList = (ListView)view.findViewById(R.id.fallsList);
@@ -47,7 +47,7 @@ public class BrowseFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return falls.size();
+            return loggedFalls.size();
         }
 
         @Override
@@ -75,8 +75,8 @@ public class BrowseFragment extends Fragment {
                 }
             });
 
-            dateText.setText(falls.get(i).getDate());
-            timeText.setText(falls.get(i).getTime());
+            dateText.setText(loggedFalls.get(i).getDate());
+            timeText.setText(loggedFalls.get(i).getTime());
 
             return view;
         }

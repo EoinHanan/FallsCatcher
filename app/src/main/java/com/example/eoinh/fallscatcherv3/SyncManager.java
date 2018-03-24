@@ -1,7 +1,6 @@
 package com.example.eoinh.fallscatcherv3;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,18 +8,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by EoinH on 11/03/2018.
- */
-
 public class SyncManager {
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
     private static final String ROOT_URL = "http://10.52.2.122/sync2/v1/Api.php?apicall=";
     private static final String URL_CREATE_FALL = ROOT_URL + "createFall";
-    private static final String URL_READ_HEROES = ROOT_URL + "getheroes";
-    private static final String URL_UPDATE_HERO = ROOT_URL + "updatehero";
-    private static final String URL_DELETE_HERO = ROOT_URL + "deletehero&id=";
+    private static final String URL_READ_FALLS = ROOT_URL + "getFalls";
+    private static final String URL_UPDATE_FALLS = ROOT_URL + "updateFalls";
+    private static final String URL_DELETE_FALL = ROOT_URL + "deleteFall&id=";
     private DatabaseHandler databaseHandler;
 
 
@@ -29,10 +24,10 @@ public class SyncManager {
     }
 
     public void sync(){
-        ArrayList<Fall> localNewFalls = databaseHandler.getFallsBySyncStatus(1);
+        ArrayList<LoggedFall> localNewLoggedFalls = databaseHandler.getFallsBySyncStatus(1);
 
-        for (Fall fall: localNewFalls) {
-            createFall(fall);
+        for (LoggedFall loggedFall : localNewLoggedFalls) {
+            createFall(loggedFall);
         }
         databaseHandler.setSynced(1);
 /*
@@ -50,65 +45,49 @@ public class SyncManager {
         }
         databaseHandler.clearDeletedFalls();
 
-        ArrayList<Fall> centralNewFalls = getCentralNewFalls();
-        databaseHandler.newFallsFromCentral(centralNewFalls);
+        ArrayList<Fall> centralFalls = getCentralFalls();
+        databaseHandler.sortCentralChanges(centralFalls);
 
-        ArrayList<Fall> centralUpdatedFalls = getCentralUpdateFalls();
-        databaseHandler.updateFallsFromCentral(centralUpdatedFalls);
-
-        ArrayList<Fall> centralDeletedFalls = getCentralDeletedFalls();
-        databaseHandler.deleteFallsFromCentral(centralDeletedFalls);
+        databaseHandler.clearDeletedFalls();
 */
     }
 
-    private void createFall(Fall fall) {
+    private void createFall(LoggedFall loggedFall) {
         HashMap<String, String> params = new HashMap<>();
-        params.put("localFallID", "" + fall.getFallID());
-        params.put("patientID", "" + fall.getPatientID());
-        params.put("date", fall.getDate());
-        params.put("timeStatus", fall.getTimeStatus());
-        params.put("time", fall.getTime());
-        params.put("medical", fall.getMedical());
-        params.put("location", fall.getLocation());
-        params.put("cause", fall.getCause());
-        params.put("injury", fall.getInjury());
-        params.put("lengthOfLie", "" + fall.getLengthOfLie());
-        params.put("lengthStatus", fall.getLengthStatus());
-        params.put("help", fall.getHelp());
-        params.put("relapse", fall.getRelapse());
-        params.put("comment", fall.getComment());
+        params.put("localFallID", "" + loggedFall.getFallID());
+        params.put("patientID", "" + loggedFall.getPatientID());
+        params.put("date", loggedFall.getDate());
+        params.put("timeStatus", loggedFall.getTimeStatus());
+        params.put("time", loggedFall.getTime());
+        params.put("medical", loggedFall.getMedical());
+        params.put("location", loggedFall.getLocation());
+        params.put("cause", loggedFall.getCause());
+        params.put("injury", loggedFall.getInjury());
+        params.put("lengthOfLie", "" + loggedFall.getLengthOfLie());
+        params.put("lengthStatus", loggedFall.getLengthStatus());
+        params.put("help", loggedFall.getHelp());
+        params.put("relapse", loggedFall.getRelapse());
+        params.put("comment", loggedFall.getComment());
 
         PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_FALL, params, CODE_POST_REQUEST);
         request.execute();
     }
 
-    private void deleteFall(Fall fall){
+    private void deleteFall(LoggedFall loggedFall){
 
     }
 
-    private void editFall(Fall fall){
+    private void editFall(LoggedFall loggedFall){
 
     }
 
-    public ArrayList<Fall> getCentralNewFalls() {
-        ArrayList<Fall> falls = new ArrayList<>();
+    public ArrayList<LoggedFall> getCentralFalls() {
+        ArrayList<LoggedFall> loggedFalls = new ArrayList<>();
         //Get Stuff
 
-        return falls;
-    }
-    public ArrayList<Fall> getCentralUpdateFalls() {
-        ArrayList<Fall> falls = new ArrayList<>();
-        //Get Stuff
-
-        return falls;
+        return loggedFalls;
     }
 
-    public ArrayList<Fall> getCentralDeletedFalls() {
-        ArrayList<Fall> falls = new ArrayList<>();
-        //Get Stuff
-
-        return falls;
-    }
 
     private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         String url;

@@ -86,21 +86,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addFall(Fall fall){
+    public void addFall(LoggedFall loggedFall){
         ContentValues values = new ContentValues();
-        values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_Date, fall.getDate());
-        values.put(Column_Time, fall.getTime());
-        values.put(Column_TimeStatus, fall.getTimeStatus());
-        values.put(Column_Location, fall.getLocation());
-        values.put(Column_Cause, fall.getCause());
-        values.put(Column_Injury, fall.getInjury());
-        values.put(Column_LengthOfLie, fall.getLengthOfLie());
-        values.put(Column_LengthStatus, fall.getLengthStatus());
-        values.put(Column_Medical, fall.getMedical());
-        values.put(Column_Help, fall.getHelp());
-        values.put(Column_Relapse, fall.getRelapse());
-        values.put(Column_Comment, fall.getComment());
+        values.put(Column_PatientID, loggedFall.getPatientID());
+        values.put(Column_Date, loggedFall.getDate());
+        values.put(Column_Time, loggedFall.getTime());
+        values.put(Column_TimeStatus, loggedFall.getTimeStatus());
+        values.put(Column_Location, loggedFall.getLocation());
+        values.put(Column_Cause, loggedFall.getCause());
+        values.put(Column_Injury, loggedFall.getInjury());
+        values.put(Column_LengthOfLie, loggedFall.getLengthOfLie());
+        values.put(Column_LengthStatus, loggedFall.getLengthStatus());
+        values.put(Column_Medical, loggedFall.getMedical());
+        values.put(Column_Help, loggedFall.getHelp());
+        values.put(Column_Relapse, loggedFall.getRelapse());
+        values.put(Column_Comment, loggedFall.getComment());
         values.put(Column_Sync, 1);
 
         SQLiteDatabase db = getWritableDatabase();
@@ -121,26 +121,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void editFall( int old, Fall fall){
+    public void editFall(LoggedFall loggedFall){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Column_PatientID, fall.getPatientID());
-        values.put(Column_Date, fall.getDate());
-        values.put(Column_Time, fall.getTime());
-        values.put(Column_TimeStatus, fall.getTimeStatus());
-        values.put(Column_Location, fall.getLocation());
-        values.put(Column_Cause, fall.getCause());
-        values.put(Column_Injury, fall.getInjury());
-        values.put(Column_LengthOfLie, fall.getLengthOfLie());
-        values.put(Column_LengthStatus, fall.getLengthStatus());
-        values.put(Column_Medical, fall.getMedical());
-        values.put(Column_Help, fall.getHelp());
-        values.put(Column_Relapse, fall.getRelapse());
-        values.put(Column_Comment, fall.getComment());
+        values.put(Column_PatientID, loggedFall.getPatientID());
+        values.put(Column_Date, loggedFall.getDate());
+        values.put(Column_Time, loggedFall.getTime());
+        values.put(Column_TimeStatus, loggedFall.getTimeStatus());
+        values.put(Column_Location, loggedFall.getLocation());
+        values.put(Column_Cause, loggedFall.getCause());
+        values.put(Column_Injury, loggedFall.getInjury());
+        values.put(Column_LengthOfLie, loggedFall.getLengthOfLie());
+        values.put(Column_LengthStatus, loggedFall.getLengthStatus());
+        values.put(Column_Medical, loggedFall.getMedical());
+        values.put(Column_Help, loggedFall.getHelp());
+        values.put(Column_Relapse, loggedFall.getRelapse());
+        values.put(Column_Comment, loggedFall.getComment());
         values.put(Column_Comment, 2);
 
-        sqLiteDatabase.update(Table_Fall, values, "_id="+old, null);
+        sqLiteDatabase.update(Table_Fall, values, "_id="+ loggedFall.getFallID(), null);
     }
 
     public void editUser(User user){
@@ -198,9 +198,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return user;
     }
 
-    public ArrayList<Fall> getFalls(){
+    public ArrayList<LoggedFall> getFalls(){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ArrayList<Fall> falls = new ArrayList<>();
+        ArrayList<LoggedFall> loggedFalls = new ArrayList<>();
         String query = "Select * from " + Table_Fall + " where 1";
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         cursor.moveToFirst();
@@ -223,18 +223,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String medical  = cursor.getString(cursor.getColumnIndex(Column_Medical));
                 int sync  = cursor.getInt(cursor.getColumnIndex(Column_Sync));
 
-                Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment,sync);
+                LoggedFall loggedFall = new LoggedFall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment,sync);
 
-                falls.add(fall);
+                loggedFalls.add(loggedFall);
             }while(cursor.moveToNext());
         }
 
-        return falls;
+        return loggedFalls;
     }
 
-    public ArrayList<Fall> getFallsBySyncStatus(int status){
+    public ArrayList<LoggedFall> getFallsBySyncStatus(int status){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ArrayList<Fall> falls = new ArrayList<>();
+        ArrayList<LoggedFall> loggedFalls = new ArrayList<>();
         String query = "Select * from " + Table_Fall + " where sync = " + status;
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         cursor.moveToFirst();
@@ -256,27 +256,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 String comment = cursor.getString(cursor.getColumnIndex(Column_Comment));
                 String medical  = cursor.getString(cursor.getColumnIndex(Column_Medical));
 
-                Fall fall = new Fall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
+                LoggedFall loggedFall = new LoggedFall(fallID, patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
 
-                falls.add(fall);
+                loggedFalls.add(loggedFall);
             }while(cursor.moveToNext());
         }
-        return falls;
+        return loggedFalls;
     }
 
 
-    public void newFallsFromCentral(ArrayList<Fall> falls){
-        //To Do
+    public void sortCentralChanges(ArrayList<LoggedFall> loggedFalls){
+        for (LoggedFall loggedFall : loggedFalls){
+            switch (loggedFall.getSync()) {
+                case 1: addFall(loggedFall); ; break;
+                case 2: editFall(loggedFall); break;
+                case 3: deleteLocalFall(loggedFall.getFallID()); break;
+            }
+        }
     }
 
 
-    public void updateFallsFromCentral(ArrayList<Fall> falls){
-        //To Do
-    }
-
-    public void deleteFallsFromCentral(ArrayList<Fall> falls){
-        //To Do
-    }
 
     public void clearAll() {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();

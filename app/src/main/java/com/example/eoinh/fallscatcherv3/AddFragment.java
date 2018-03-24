@@ -124,8 +124,8 @@ public class AddFragment extends Fragment {
 
                 if (allValid){
 //                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
-                    Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
-                    db.addFall(fall);
+                    LoggedFall loggedFall = new LoggedFall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
+                    db.addFall(loggedFall);
                     Toast.makeText(view.getContext(),"Number of falls " + db.getFalls().size(), Toast.LENGTH_SHORT).show();
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
