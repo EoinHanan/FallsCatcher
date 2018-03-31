@@ -124,8 +124,8 @@ public class AddFragment extends Fragment {
 
                 if (allValid){
 //                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
-                    LoggedFall loggedFall = new LoggedFall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
-                    db.addFall(loggedFall);
+                    Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
+                    db.addFall(fall);
                     Toast.makeText(view.getContext(),"Number of falls " + db.getFalls().size(), Toast.LENGTH_SHORT).show();
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
@@ -164,17 +164,17 @@ public class AddFragment extends Fragment {
                     selected[0] = true;
 
                     buttonSelected[0] = true;
-                    currentDateButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    currentDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[1] = false;
-                    selectDateButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    selectDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     date = getCurrentDate();
                 }
                 else{
                     selected[0] = false;
                     buttonSelected[0] = false;
-                    currentDateButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    currentDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -202,10 +202,10 @@ public class AddFragment extends Fragment {
                             selected[0] = true;
 
                             buttonSelected[0] = false;
-                            currentDateButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            currentDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                             buttonSelected[1] = true;
-                            selectDateButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            selectDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                             dialog.dismiss();
                         }
@@ -215,7 +215,7 @@ public class AddFragment extends Fragment {
                 else{
                     buttonSelected[1] = false;
                     selected[0] = false;
-                    selectDateButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    selectDateButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -229,18 +229,18 @@ public class AddFragment extends Fragment {
                     selected[1] = true;
 
                     buttonSelected[2] = true;
-                    unknownFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    unknownFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[3] = false;
-                    estimateFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    estimateFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[4] = false;
-                    exactFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    exactFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     selected[1] = false;
                     buttonSelected[2] = false;
-                    unknownFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    unknownFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -272,13 +272,13 @@ public class AddFragment extends Fragment {
                                     selected[1] = true;
 
                                     buttonSelected[2] = false;
-                                    unknownFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    unknownFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[3] = true;
-                                    estimateFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    estimateFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                                     buttonSelected[4] = false;
-                                    exactFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    exactFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     dialog.dismiss();
                                 } else
@@ -293,7 +293,7 @@ public class AddFragment extends Fragment {
                 else{
                     selected[1] = false;
                     buttonSelected[3] = false;
-                    estimateFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    estimateFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -324,13 +324,13 @@ public class AddFragment extends Fragment {
                                     selected[1] = true;
 
                                     buttonSelected[2] = false;
-                                    unknownFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    unknownFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[3] = false;
-                                    estimateFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    estimateFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[4] = true;
-                                    exactFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    exactFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                                     dialog.dismiss();
                                 }
@@ -345,7 +345,7 @@ public class AddFragment extends Fragment {
                 else{
                     selected[1] = false;
                     buttonSelected[4] = false;
-                    exactFallTimeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    exactFallTimeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -359,20 +359,20 @@ public class AddFragment extends Fragment {
                     selected[2] = true;
 
                     buttonSelected[5] = true;
-                    unknownLengthButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    unknownLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[6] = false;
-                    estimateLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    estimateLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[7] = false;
-                    exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    exactLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     dialog.dismiss();
                 }
                 else{
                     selected[2] = false;
                     buttonSelected[5] = false;
-                    unknownLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    unknownLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -403,13 +403,13 @@ public class AddFragment extends Fragment {
                                     selected[2] = true;
 
                                     buttonSelected[5] = false;
-                                    unknownLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    unknownLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[6] = true;
-                                    estimateLengthButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    estimateLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                                     buttonSelected[7] = false;
-                                    exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    exactLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     dialog.dismiss();
                                 }
@@ -424,7 +424,7 @@ public class AddFragment extends Fragment {
                 else{
                     selected[2] = false;
                     buttonSelected[6] = false;
-                    estimateLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    estimateLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -454,13 +454,13 @@ public class AddFragment extends Fragment {
                                     selected[2] = true;
 
                                     buttonSelected[5] = false;
-                                    unknownLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    unknownLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[6] = false;
-                                    estimateLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                    estimateLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                     buttonSelected[7] = true;
-                                    exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    exactLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                                     dialog.dismiss();
                                 }
@@ -475,7 +475,7 @@ public class AddFragment extends Fragment {
                 else{
                     buttonSelected[7] = false;
                     selected[2] = false;
-                    exactLengthButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    exactLengthButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -488,18 +488,18 @@ public class AddFragment extends Fragment {
                     selected[3] = true;
 
                     buttonSelected[8] = true;
-                    insideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    insideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[9] = false;
-                    outsideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    outsideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[10] = false;
-                    awayFromHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    awayFromHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     buttonSelected[8] = false;
                     selected[3] = false;
-                    insideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    insideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -511,18 +511,18 @@ public class AddFragment extends Fragment {
                     selected[3] = true;
 
                     buttonSelected[8] = false;
-                    insideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    insideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[9] = true;
-                    outsideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    outsideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[10] = false;
-                    awayFromHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    awayFromHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     buttonSelected[9] = false;
                     selected[3] = false;
-                    outsideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    outsideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -535,18 +535,18 @@ public class AddFragment extends Fragment {
                     selected[3] = true;
 
                     buttonSelected[8] = false;
-                    insideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    insideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[9] = false;
-                    outsideHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    outsideHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                     buttonSelected[10] = true;
-                    awayFromHomeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    awayFromHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
                 }
                 else{
                     buttonSelected[10] = false;
                     selected[3] = false;
-                    awayFromHomeButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    awayFromHomeButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -559,15 +559,15 @@ public class AddFragment extends Fragment {
                     help ="None";
 
                     buttonSelected[11] = true;
-                    noHelpButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    noHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[12] = false;
-                    yesHelpButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     buttonSelected[11] = false;
                     selected[4] = false;
-                    noHelpButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    noHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -607,10 +607,10 @@ public class AddFragment extends Fragment {
                                 selected[4] = true;
 
                                 buttonSelected[11] = false;
-                                noHelpButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                noHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                                 buttonSelected[12] = true;
-                                yesHelpButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                yesHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                                 dialog.dismiss();
                             }
@@ -622,7 +622,7 @@ public class AddFragment extends Fragment {
                 else{
                     buttonSelected[12] = false;
                     selected[4] = false;
-                    yesHelpButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesHelpButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -634,15 +634,15 @@ public class AddFragment extends Fragment {
                     injury = "None";
 
                     buttonSelected[13] = true;
-                    noInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    noInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[14] = false;
-                    yesInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     buttonSelected[13] = false;
                     selected[5] = false;
-                    noInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    noInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -664,10 +664,10 @@ public class AddFragment extends Fragment {
                             selected[5] = true;
 
                             buttonSelected[13] = false;
-                            noInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            noInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                             buttonSelected[14] = true;
-                            yesInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            yesInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                             dialog.dismiss();
                         }
@@ -802,7 +802,7 @@ public class AddFragment extends Fragment {
                 else{
                     buttonSelected[14] = false;
                     selected[5] = false;
-                    yesInjuryButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesInjuryButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -814,15 +814,15 @@ public class AddFragment extends Fragment {
                     selected[6] = true;
 
                     buttonSelected[15] = true;
-                    noMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    noMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[16] = false;
-                    yesMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     selected[6] = false;
                     buttonSelected[15] = false;
-                    noMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    noMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -843,10 +843,10 @@ public class AddFragment extends Fragment {
                             selected[6] = true;
 
                             buttonSelected[15] = false;
-                            noMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            noMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                             buttonSelected[16] = true;
-                            yesMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            yesMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
                             dialog.dismiss();
                         }
                     });
@@ -854,7 +854,7 @@ public class AddFragment extends Fragment {
                 else{
                     selected[6] = false;
                     buttonSelected[16] = false;
-                    yesMedicalButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesMedicalButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
             public String getMedical(){
@@ -919,15 +919,15 @@ public class AddFragment extends Fragment {
                     relapse = "None";
 
                     buttonSelected[17] = true;
-                    noRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    noRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
 
                     buttonSelected[18] = false;
-                    yesRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
                 else{
                     selected[7] = false;
                     buttonSelected[17] = false;
-                    noRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    noRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
         });
@@ -947,10 +947,10 @@ public class AddFragment extends Fragment {
                             relapse = getRelapse();
 
                             buttonSelected[17] = false;
-                            noRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            noRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
 
                             buttonSelected[18] = true;
-                            yesRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            yesRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button_pressed));
                             dialog.dismiss();
                         }
 
@@ -991,7 +991,7 @@ public class AddFragment extends Fragment {
                 else{
                     selected[5] = false;
                     buttonSelected[18] = false;
-                    yesRelapseButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    yesRelapseButton.setBackground(getResources().getDrawable(R.drawable.basic_button));
                 }
             }
 

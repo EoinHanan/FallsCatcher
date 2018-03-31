@@ -77,6 +77,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startSync();
+                Toast.makeText(getActivity().getApplicationContext(), "Sync Complete", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -88,6 +89,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void startSync() {
+
         syncManager.sync();
     }
 

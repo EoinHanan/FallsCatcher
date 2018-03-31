@@ -2,6 +2,7 @@ package com.example.eoinh.fallscatcherv3;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -16,10 +19,10 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class BrowseFragment extends Fragment {
-    private TextView text;
     private DatabaseHandler db;
-    private ArrayList<LoggedFall> loggedFalls;
+    private ArrayList<Fall> falls;
     private ListView fallsList;
+    private Button editButton;
 
     public BrowseFragment() {
         // Required empty public constructor
@@ -32,8 +35,8 @@ public class BrowseFragment extends Fragment {
 
         db = new DatabaseHandler(getActivity(), null,null);
 //        db.fix();
-//        db.clearAll();
-        loggedFalls = db.getFalls();
+
+        falls = db.getFalls();
 
         CustomAdapter customAdapter = new CustomAdapter();
         fallsList = (ListView)view.findViewById(R.id.fallsList);
@@ -47,7 +50,7 @@ public class BrowseFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return loggedFalls.size();
+            return falls.size();
         }
 
         @Override
@@ -61,22 +64,33 @@ public class BrowseFragment extends Fragment {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             view = getLayoutInflater().inflate(R.layout.fall_row,null);
+            final int id = i + 1;
 
             TextView dateText = (TextView)view.findViewById(R.id.dateText);
             TextView timeText = (TextView)view.findViewById(R.id.timeText);
-            Button editButton = (Button) view.findViewById(R.id.editButton);
+            TextView commentText = (TextView)view.findViewById(R.id.commentText);
+            TextView syncText = (TextView)view.findViewById(R.id.syncText);
+            editButton = (Button) view.findViewById(R.id.editButton);
 
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Toast.makeText(getActivity().getApplicationContext(), "Comment edited", Toast.LENGTH_SHORT).show();
+                    Fall fall = falls.get(id);
+                    int sync = fall.getSync();
+                    fall.setSync(2);
+                    fall.setComment("Edited");
+                    Log.d("Edit",fall.getComment());
+                    db.editFall(fall,sync);
                 }
             });
 
-            dateText.setText(loggedFalls.get(i).getDate());
-            timeText.setText(loggedFalls.get(i).getTime());
+            dateText.setText(falls.get(i).getDate());
+            timeText.setText(falls.get(i).getTime());
+            commentText.setText(falls.get(i).getComment());
+            syncText.setText("" + falls.get(i).getSync());
 
             return view;
         }
