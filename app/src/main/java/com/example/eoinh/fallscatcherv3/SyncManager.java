@@ -1,7 +1,6 @@
 package com.example.eoinh.fallscatcherv3;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +34,6 @@ public class SyncManager {
         databaseHandler.setSynced(1);
 
         ArrayList<Fall> localEditedFalls = databaseHandler.getFallsBySyncStatus(2);
-        Log.d("Falls", String.valueOf(localNewFalls.size()));
 
         for (Fall fall: localEditedFalls) {
             updateFall(fall);
@@ -43,7 +41,6 @@ public class SyncManager {
         databaseHandler.setSynced(2);
 
         ArrayList<Fall> localDeletedFalls = databaseHandler.getFallsBySyncStatus(3);
-        Log.d("Deletions", String.valueOf(localDeletedFalls.size()));
 
         for (Fall fall: localDeletedFalls) {
             deleteFall(fall);
@@ -105,16 +102,12 @@ public class SyncManager {
     }
 
     private void readCentralFalls() {
-        Log.d("Progress", "In read");
         PerformNetworkRequest request = new PerformNetworkRequest(URL_READ_FALLS + databaseHandler.getPatientID(), null, CODE_GET_REQUEST);
         request.execute();
     }
     private void getCentralFalls(JSONArray fallsJSON) throws JSONException {
-        Log.d("Progress", "In get");
         for (int i = 0; i < fallsJSON.length(); i++) {
             JSONObject obj = fallsJSON.getJSONObject(i);
-
-            Log.d("Adding", "New fall with " + obj.getInt("syncStatus"));
 
             falls.add(new Fall(
                 obj.getInt("localFallID"),
@@ -133,9 +126,6 @@ public class SyncManager {
                 obj.getString("comment"),
                 obj.getInt("syncStatus")
             ));
-
-            Log.d("Falls size", String.valueOf(falls.size()));
-            
         }
     }
 
@@ -163,12 +153,9 @@ public class SyncManager {
             super.onPostExecute(s);
             try {
                 JSONObject object = new JSONObject(s);
-                Log.i("tagconvertstr", "["+s+"]");
                 if (!object.getBoolean("error")) {
                     getCentralFalls(object.getJSONArray("falls"));
-                    Log.d("Falls size in sync", String.valueOf(falls.size()));
                     databaseHandler.sortCentralChanges(falls);
-
                     databaseHandler.clearDeletedFalls();
                 }
             } catch (JSONException e) {

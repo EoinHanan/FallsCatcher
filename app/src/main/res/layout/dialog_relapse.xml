@@ -13,6 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorWriting"
         android:text="Relaspe Info"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +25,7 @@
         android:layout_height="460dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
+        android:textColor="@color/colorWriting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="0"
+            android:textColor="@color/colorWriting"
             android:text="When did the relapse start?" />
 
         <TextView
@@ -42,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="1"
+            android:textColor="@color/colorWriting"
             android:text="How long did it continue?" />
 
         <TextView
@@ -50,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="2"
+            android:textColor="@color/colorWriting"
             android:text="What Symptoms did you notice?" />
 
         <TextView
@@ -58,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="3"
+            android:textColor="@color/colorWriting"
             android:text="Did you visit a healthcare proffessional?" />
 
         <EditText
@@ -67,6 +73,7 @@
             android:layout_column="1"
             android:layout_row="1"
             android:ems="10"
+            android:textColor="@color/colorWriting"
             android:inputType="textPersonName" />
 
         <EditText
@@ -76,6 +83,7 @@
             android:layout_column="1"
             android:layout_row="2"
             android:ems="10"
+            android:textColor="@color/colorWriting"
             android:inputType="textPersonName" />
 
         <EditText
@@ -85,6 +93,7 @@
             android:layout_column="1"
             android:layout_row="3"
             android:ems="10"
+            android:textColor="@color/colorWriting"
             android:inputType="textPersonName" />
 
         <EditText
