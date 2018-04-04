@@ -203,7 +203,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<Fall> getFalls(){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ArrayList<Fall> falls = new ArrayList<>();
-        String query = "Select * from " + Table_Fall + " where 1";
+        String query = "Select * from " + Table_Fall + " where " + Column_Sync + " != 3";
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         cursor.moveToFirst();
 
@@ -265,11 +265,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void sortCentralChanges(ArrayList<Fall> falls){
+        Log.i("Central", "Inside method");
         for (Fall fall : falls){
+            Log.i("Sync Status ", String.valueOf(fall.getSync()) );
             switch (fall.getSync()) {
-                case 1: addFall(fall); ; break;
+                case 1: fall.setSync(0);addFall(fall); break;
                 case 2: editFall(fall,0); break;
-                case 3: deleteLocalFall(fall.getFallID()); break;
+                case 3: deleteLocalFall(fall.getFallID());Log.i("Central", "Fall Deleted"); break;
             }
         }
     }

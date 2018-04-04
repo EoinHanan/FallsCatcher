@@ -3,6 +3,7 @@ package com.example.eoinh.fallscatcherv3;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,11 +13,12 @@ import java.util.HashMap;
 public class SyncManager {
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
-    private static final String ROOT_URL = "http://10.52.2.110/sync2/v1/Api.php?apicall=";
+    private static final String ROOT_URL = "http://178.62.220.209/CommunicationApi/v1/api.php?apicall=";
     private static final String URL_CREATE_FALL = ROOT_URL + "createFall";
-    private static final String URL_READ_FALLS = ROOT_URL + "getFalls";
+    private static final String URL_READ_FALLS = ROOT_URL + "getFalls&patientID=";
     private static final String URL_UPDATE_FALL = ROOT_URL + "updateFall";
-    private static final String URL_DELETE_FALL = ROOT_URL + "deleteFall&id=";
+    private static final String URL_DELETE_FALL = ROOT_URL + "deleteFall&fallID=";
+    private ArrayList<Fall> falls;
     private DatabaseHandler databaseHandler;
 
 
@@ -33,7 +35,7 @@ public class SyncManager {
         databaseHandler.setSynced(1);
 
         ArrayList<Fall> localEditedFalls = databaseHandler.getFallsBySyncStatus(2);
-        Log.d("Falls", String.valueOf(localEditedFalls.size()));
+        Log.d("Falls", String.valueOf(localNewFalls.size()));
 
         for (Fall fall: localEditedFalls) {
             updateFall(fall);
@@ -41,17 +43,18 @@ public class SyncManager {
         databaseHandler.setSynced(2);
 
         ArrayList<Fall> localDeletedFalls = databaseHandler.getFallsBySyncStatus(3);
+        Log.d("Deletions", String.valueOf(localDeletedFalls.size()));
 
         for (Fall fall: localDeletedFalls) {
             deleteFall(fall);
         }
         databaseHandler.clearDeletedFalls();
-         /*
-        ArrayList<Fall> centralFalls = getCentralFalls();
-        databaseHandler.sortCentralChanges(centralFalls);
 
-        databaseHandler.clearDeletedFalls();
-*/
+        falls = new ArrayList<Fall>();
+        readCentralFalls();
+
+
+
     }
 
     private void createFall(Fall fall) {
@@ -76,7 +79,8 @@ public class SyncManager {
     }
 
     private void deleteFall(Fall fall){
-
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_DELETE_FALL + fall.getFallID() + "&patientID=" + fall.getPatientID(), null, CODE_GET_REQUEST);
+        request.execute();
     }
 
     private void updateFall(Fall fall){
@@ -96,30 +100,43 @@ public class SyncManager {
         params.put("relapse", fall.getRelapse());
         params.put("comment", fall.getComment());
 
-        Log.d("localFallID", String.valueOf(fall.getFallID()));
-        Log.d("patientID", String.valueOf(fall.getPatientID()));
-        Log.d("date", fall.getDate());
-        Log.d("timeStatus", fall.getTimeStatus());
-        Log.d("time", fall.getTime());
-        Log.d("medical", fall.getMedical());
-        Log.d("location", fall.getLocation());
-        Log.d("cause", fall.getCause());
-        Log.d("injury", fall.getInjury());
-        Log.d("lengthOfLie", String.valueOf(fall.getLengthOfLie()));
-        Log.d("lengthStatus", fall.getLengthStatus());
-        Log.d("help", fall.getHelp());
-        Log.d("relapse", fall.getRelapse());
-        Log.d("comment", fall.getComment());
-
         PerformNetworkRequest request = new PerformNetworkRequest(URL_UPDATE_FALL, params, CODE_POST_REQUEST);
         request.execute();
     }
 
-    public ArrayList<Fall> getCentralFalls() {
-        ArrayList<Fall> falls = new ArrayList<>();
-        //Get Stuff
+    private void readCentralFalls() {
+        Log.d("Progress", "In read");
+        PerformNetworkRequest request = new PerformNetworkRequest(URL_READ_FALLS + databaseHandler.getPatientID(), null, CODE_GET_REQUEST);
+        request.execute();
+    }
+    private void getCentralFalls(JSONArray fallsJSON) throws JSONException {
+        Log.d("Progress", "In get");
+        for (int i = 0; i < fallsJSON.length(); i++) {
+            JSONObject obj = fallsJSON.getJSONObject(i);
 
-        return falls;
+            Log.d("Adding", "New fall with " + obj.getInt("syncStatus"));
+
+            falls.add(new Fall(
+                obj.getInt("localFallID"),
+                obj.getInt("patientID"),
+                obj.getString("date"),
+                obj.getString("timeStatus"),
+                obj.getString("location"),
+                obj.getString("cause"),
+                obj.getString("time"),
+                obj.getString("injury"),
+                obj.getInt("lengthOfLie"),
+                obj.getString("lengthStatus"),
+                obj.getString("medical"),
+                obj.getString("help"),
+                obj.getString("relapse"),
+                obj.getString("comment"),
+                obj.getInt("syncStatus")
+            ));
+
+            Log.d("Falls size", String.valueOf(falls.size()));
+            
+        }
     }
 
 
@@ -146,8 +163,13 @@ public class SyncManager {
             super.onPostExecute(s);
             try {
                 JSONObject object = new JSONObject(s);
+                Log.i("tagconvertstr", "["+s+"]");
                 if (!object.getBoolean("error")) {
-                    //Return Error
+                    getCentralFalls(object.getJSONArray("falls"));
+                    Log.d("Falls size in sync", String.valueOf(falls.size()));
+                    databaseHandler.sortCentralChanges(falls);
+
+                    databaseHandler.clearDeletedFalls();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

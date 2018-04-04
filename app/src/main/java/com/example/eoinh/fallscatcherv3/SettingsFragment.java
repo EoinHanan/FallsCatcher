@@ -76,7 +76,11 @@ public class SettingsFragment extends Fragment {
         syncButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startSync();
+                try {
+                    startSync();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getActivity().getApplicationContext(), "Sync Complete", Toast.LENGTH_SHORT).show();
             }
         });
@@ -88,7 +92,7 @@ public class SettingsFragment extends Fragment {
 
     }
 
-    public void startSync() {
+    public void startSync() throws InterruptedException {
 
         syncManager.sync();
     }

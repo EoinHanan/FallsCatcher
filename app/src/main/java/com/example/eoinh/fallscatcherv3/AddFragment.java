@@ -117,11 +117,6 @@ public class AddFragment extends Fragment {
             public void onClick(View view) {
                 boolean allValid = true;
 
-                for (int i =0; i < selected.length && allValid;i++) {
-                    allValid = selected[i];
-                    Log.d("Inside", "In array + " + i + " is " + selected[i]);
-                }
-
                 if (allValid){
 //                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
