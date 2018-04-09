@@ -42,4 +42,7 @@ public class User {
     }
     public String getNotification(){
         return notification;}
+    public void setNotification(String notification){
+        this.notification = notification;
+    }
 }

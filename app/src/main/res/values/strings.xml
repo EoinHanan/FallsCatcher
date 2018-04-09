@@ -57,4 +57,5 @@
     <string name="enter_time_of_fall">Enter time of fall</string>
     <string name="hours">Hours</string>
     <string name="minutes">Minutes</string>
+    <string name="title_activity_login_page">loginPage</string>
 </resources>

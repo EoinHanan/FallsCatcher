@@ -1,46 +1,32 @@
 package com.example.eoinh.fallscatcherv3;
 
-import android.content.DialogInterface;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.*;
-
-import static android.view.View.GONE;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingsFragment extends Fragment {
 
-    private TextView timeBox;
+    private TextView hourBox, minuteBox;
     private ToggleButton reminderButton;
     private View view;
-    private Button syncButton;
+    private Button syncButton, logOutButton;
     private DatabaseHandler databaseHandler;
     private SyncManager syncManager;
+    private NotificationManager notificationManager;
+    private LoginManager loginManager;
 
-    NotificationCompat.Builder notification;
-    private static final int uniqueID = 334;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -48,30 +34,58 @@ public class SettingsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = getLayoutInflater().inflate(R.layout.fragment_settings,null);
 
-        timeBox = (TextView)view.findViewById (R.id.reminderTimeBox);
+        hourBox = (TextView)view.findViewById (R.id.reminderHourBox);
+        minuteBox = (TextView)view.findViewById (R.id.reminderMinuteBox);
         reminderButton = (ToggleButton)view.findViewById (R.id.reminderButton);
+
+        notificationManager = new NotificationManager(this.getContext());
 
         databaseHandler = new DatabaseHandler(getActivity(), null,null);
         syncManager = new SyncManager(databaseHandler);
 
-        notification = new NotificationCompat.Builder(getActivity(), "Channel id");
-        notification.setAutoCancel(true);
+        User user = databaseHandler.getUser();
+
+        if (!user.getNotification().equals("")) {
+            String[] parts = user.getNotification().split(":");
+            long time = (Integer.parseInt(parts[0]) * 360000) + (Integer.parseInt(parts[1]) * 60000);
+            notificationManager.turnOnNotification(time);
+        }
+        else
+            notificationManager.turnOffNotification();
 
         reminderButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
-                setNotification(true);
+                if (!minuteBox.getText().toString().equals("")){
+                    int minute =  Integer.parseInt(minuteBox.getText().toString());
+                    int hour = 0;
+                    if (!hourBox.getText().toString().equals(""))
+                        hour = Integer.parseInt(hourBox.getText().toString());
+
+                    long time = (hour * 360000) + (minute * 60000);
+                    notificationManager.turnOnNotification(time);
+                    User user = databaseHandler.getUser();
+                    user.setNotification(hourBox.getText().toString() + ":" + minuteBox.getText().toString());
+                    databaseHandler.setUser(user);
+                }
+                else
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a time", Toast.LENGTH_SHORT).show();
             } else {
-                setNotification(false);
+                notificationManager.turnOffNotification();
+                User user = databaseHandler.getUser();
+                user.setNotification("");
+                databaseHandler.setUser(user);
+                Toast.makeText(getActivity().getApplicationContext(), "Please enter a time", Toast.LENGTH_SHORT).show();
             }
             }
         });
 
         syncButton = (Button)view.findViewById(R.id.syncButton);
+        logOutButton = (Button)view.findViewById(R.id.syncButton);
 
         syncButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +99,19 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               loginManager.logout();
+               databaseHandler.logout();
+
+                Intent intent = new Intent(getContext(), LoginPage.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
         return view;
-    }
-
-    public void setNotification(boolean isOn){
-
     }
 
     public void startSync() throws InterruptedException {

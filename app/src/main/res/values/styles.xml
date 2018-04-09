@@ -16,13 +16,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="BasicButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/basic_button"
-        android:textSize="12sp"
-        />
+    <style name="BasicButton" android:background="@drawable/basic_button" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="wrap_content" android:textSize="12sp" />
 
     <style name="SuccessButton"
 
@@ -31,7 +25,6 @@
     <style name="DangerButton"
 
         />
-
 
 
 </resources>

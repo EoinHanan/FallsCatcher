@@ -30,13 +30,10 @@ public class MainActivity extends AppCompatActivity  {
 
     NotificationCompat.Builder notification;
     private static final int uniqueID = 334;
-    private LoginManager loginManager;
+
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
 
     @Override
@@ -46,15 +43,21 @@ public class MainActivity extends AppCompatActivity  {
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        DatabaseHandler databaseHandler = new DatabaseHandler(this,null,null);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        if (databaseHandler.checkLoggedIn()){
+            mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
+            mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+            tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        }
+        else{
+            Intent intent = new Intent(this, LoginPage.class);
+            startActivity(intent);
+        }
     }
 
 

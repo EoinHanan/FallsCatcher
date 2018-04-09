@@ -22,15 +22,23 @@ public class LoginManager {
 
     public LoginManager(DatabaseHandler databaseHandler){
         this.databaseHandler  = databaseHandler;
+        getUsers();
     }
 
     public boolean isLoggedIn(){
         return databaseHandler.checkLoggedIn();
     }
 
-    public void getUsers(){
+    private void getUsers(){
         LoginManager.PerformNetworkRequest request = new LoginManager.PerformNetworkRequest(URL_GET_USERS, null, CODE_GET_REQUEST);
         request.execute();
+    }
+
+    public User getSingleUser(String password, String name){
+        for (User user : users)
+            if (user.getPassword().equals(password) && user.getUserName().equals(name))
+                return user;
+        return null;
     }
 
     private void fillArray(JSONArray usersJSON) throws JSONException {
@@ -57,13 +65,14 @@ public class LoginManager {
         return false;
     }
 
-    public void setUser(User user){
+    private void setUser(User user){
         databaseHandler.setUser(user);
     }
 
     public void logout(){
         databaseHandler.logout();
     }
+
     public void updateNotificationTimes(User user){
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", user.getUserName());

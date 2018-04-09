@@ -37,8 +37,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Column_UserName = "name";
     private static final String Column_Password = "password";
     private static final String Column_Notification = "notification";
-    private static final String Column_NotificationMinute = "notificationMinute";
-    private static final String Column_NotificationHour = "notificationHour";
 
     public DatabaseHandler(Context context, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
         super(context, databaseName, factory, databaseVersion, errorHandler);
@@ -68,9 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         query = "CREATE TABLE " +  Table_User + " (" +
                 Column_PatientID + " INTEGER, " +
                 Column_UserName + " TEXT, " +
-                Column_Notification + " TEXT, " +
-                Column_NotificationMinute + " INTEGER, " +
-                Column_NotificationHour + " INTEGER " +
+                Column_Notification + " TEXT " +
                 ");";
         sqLiteDatabase.execSQL(query);
     }
@@ -160,26 +156,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public int getPatientID(){
-//        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-//
-//        String query = "SELECT COUNT (" +  Column_PatientID + ") FROM " + Table_User + " WHERE 1";
-//        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-//        cursor.moveToFirst();
-//
-//        int count= cursor.getInt(0);
-//
-//        if (count != 1) {
-//            return 1;
-//        }
-//
-//        query = "Select " + Column_PatientID + " from " + Table_Fall + " where 1";
-//        cursor = sqLiteDatabase.rawQuery(query, null);
-//        cursor.moveToFirst();
-//
-//        int ID = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
-//
-//        return ID;
-        return 1;
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        String query = "Select " + Column_PatientID + " from " + Table_Fall + " where 1";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        int ID = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
+
+        return ID;
     }
 
     public ArrayList<Fall> getFalls(){
@@ -258,8 +243,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-
-
     public void clearAll() {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String query = "DELETE FROM `fall` WHERE 1";
@@ -273,7 +256,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void setUser(User user){
-        //Set the user to be equal to input data.
+        ContentValues values = new ContentValues();
+        values.put(Column_PatientID, user.getUserID());
+        values.put(Column_UserName, user.getUserName());
+        values.put(Column_Notification, user.getNotification());
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(Table_User, null, values);
+        db.close();
     }
     public User getUser(){
 

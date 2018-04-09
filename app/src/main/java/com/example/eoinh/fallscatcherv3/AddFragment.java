@@ -117,26 +117,14 @@ public class AddFragment extends Fragment {
             public void onClick(View view) {
                 boolean allValid = true;
 
+                for (int i = 0; i < selected.length && allValid;i++)
+                    allValid = selected[i];
+
                 if (allValid){
-//                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
                     db.addFall(fall);
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
-//                    Log.d("FallAdded",
-//                            "PID: " + patientID +
-//                                    "\nDate: " + date +
-//                                    "\nTime Status: " +timeStatus +
-//                                    "\nlocation: "+ location +
-//                                    "\ncause: " + cause +
-//                                    "\ntime: " + time +
-//                                    "\ninjury: " + injury +
-//                                    "\nlengthOfLie: " + lengthOfLie +
-//                                    "\nlengthStatus: " + lengthStatus +
-//                                    "\nmedical: " + medical +
-//                                    "\nhelp" + help +
-//                                    "\nrelapse" + relapse +
-//                                    "\ncomment: " + comment);
                 }
                 else
                 {
@@ -703,7 +691,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="headSprain-";
                             else
                                 injury+="-";
-                            
+
                             if (headDislocationButton.isChecked())
                                 injuryString+="headDislocation-";
                             else
@@ -713,7 +701,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="headBrokenBone-";
                             else
                                 injury+="-";
-                            
+
                             if (bodyBruisesButton.isChecked())
                                 injuryString+="bodyBruises-";
                             else
@@ -728,7 +716,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="bodySprain-";
                             else
                                 injury+="-";
-                            
+
                             if (bodyDislocatedButton.isChecked())
                                 injuryString+="bodyDislocation-";
                             else
@@ -738,7 +726,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="bodyBrokenBone-";
                             else
                                 injury+="-";
-                            
+
                             if (armsBruisesButton.isChecked())
                                 injuryString+="armsBruises-";
                             else
@@ -753,7 +741,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="armsSprain-";
                             else
                                 injury+="-";
-                            
+
                             if (armsDislocatedButton.isChecked())
                                 injuryString+="armsDislocation-";
                             else
@@ -763,7 +751,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="armsBrokenBone-";
                             else
                                 injury+="-";
-                            
+
                             if (legsBruisesButton.isChecked())
                                 injuryString+="legsBruises-";
                             else
@@ -778,7 +766,7 @@ public class AddFragment extends Fragment {
                                 injuryString+="legsSprain-";
                             else
                                 injury+="-";
-                            
+
                             if (legsDislocationButton.isChecked())
                                 injuryString+="legsDislocation-";
                             else
@@ -1059,12 +1047,6 @@ public class AddFragment extends Fragment {
     public void clearFall(){
 
         getFragmentManager().beginTransaction().detach(this).attach(this).commit();
-//        Fragment frg = null;
-//        frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
-//        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.detach(frg);
-//        ft.attach(frg);
-//        ft.commit();
     }
 
     public String getCurrentDate(){

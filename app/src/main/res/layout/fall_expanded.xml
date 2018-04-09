@@ -7,7 +7,6 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_marginTop="8dp"
         android:id="@+id/addScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,28 +23,76 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <Button
+                    android:id="@+id/DeleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/danger_button"
+                    android:padding="8dp"
+                    android:text="@string/clear_fall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorWriting"/>
+
+                <Button
+                    android:id="@+id/enterButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/success_button"
+                    android:padding="8dp"
+                    android:text="Edit Fall"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/dateText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Date of Fall" />
+                    android:text="@string/date_of_fall"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView40"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/currentDateButton"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:padding="8dp"
+                    android:text="@string/current"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/selectDateButton"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/select"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -59,21 +106,38 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/time_of_fall" />
+                    android:text="@string/time_of_fall"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/unknownFallTimeButton"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/unknown"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/estimateFallTimeButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/estimate"
+                    android:padding="8dp"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/exactFallTimeButton"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:background="@drawable/basic_button"
+                    android:text="@string/exact"
+                    android:padding="8dp"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -87,21 +151,38 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/length_of_lie" />
+                    android:text="@string/length_of_lie"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/unknownLengthButton"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/unknown"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/estimateLengthButton"
+                    android:layout_width="100dp"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/estimate"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/exactLengthButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/exact"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -115,21 +196,39 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Location of Fall" />
+                    android:padding="8dp"
+                    android:text="Location of Fall"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView44"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/insideHomeButton"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/inside_home"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/outsideHomeButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/outside_home"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/awayButton"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:padding="8dp"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/away_from_home"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -144,21 +243,26 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:linksClickable="true"
-                    android:text="@string/did_you_require_help_up" />
+                    android:text="@string/did_you_require_help_up"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView43"
+                <Button
+                    android:id="@+id/noHelpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/no"
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/yesHelpButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:background="@drawable/basic_button"
+                    android:text="@string/yes"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -172,21 +276,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/injury_suffered_as_a_result" />
+                    android:text="@string/injury_suffered_as_a_result"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView45"
+                <Button
+                    android:id="@+id/noInjuryButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/no"
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/yesInjuryButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:background="@drawable/basic_button"
+                    android:text="@string/yes"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -200,21 +309,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/medical_attention_needed" />
+                    android:text="@string/medical_attention_needed"
+                    android:textColor="@color/colorWriting"/>
 
-                <TextView
-                    android:id="@+id/textView46"
+                <Button
+                    android:id="@+id/noMedicalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/no"
+                    android:textSize="12sp"/>
 
                 <Button
                     android:id="@+id/yesMedicalButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:background="@drawable/basic_button"
+                    android:text="@string/yes"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -228,55 +342,159 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/did_you_suffer_an_ms_relapse" />
+                    android:text="@string/did_you_suffer_an_ms_relapse"
+                    android:textColor="@color/colorWriting"
+                    />
 
-                <TextView
-                    android:id="@+id/textView47"
+                <Button
+                    android:id="@+id/noRelapseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:background="@drawable/basic_button"
+                    android:text="@string/no"
+                    android:textSize="12sp"                    />
 
                 <Button
                     android:id="@+id/yesRelapseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
-
+                    android:text="@string/yes"
+                    android:background="@drawable/basic_button"
+                    android:textSize="12sp"                    />
             </LinearLayout>
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/presumed_cause_of_fall"
+                android:textColor="@color/colorWriting"/>
 
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView7"
+                <RadioButton
+                    android:id="@+id/radioButton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/presumed_cause_of_fall" />
+                    android:text="@string/i_m_not_sure" />
 
-                <TextView
-                    android:id="@+id/textView47"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/yesRelapseButton2"
+                <RadioButton
+                    android:id="@+id/radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="@string/edit" />
+                    android:text="@string/poor_balance" />
 
-            </LinearLayout>
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/weak_legs_or_legs_gave_way" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/not_using_a_walking_aid_incorrectly_using_a_walking_aid_or_using_wrong_walking_aid" />
+
+                <RadioButton
+                    android:id="@+id/radioButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tripped_or_slipped" />
+
+                <RadioButton
+                    android:id="@+id/radioButton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/transfer_from_surface_to_surface_went_wrong" />
+
+                <RadioButton
+                    android:id="@+id/radioButton7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/not_paying_attention_or_getting_distracted" />
+
+                <RadioButton
+                    android:id="@+id/radioButton8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/miscalculated_a_distance_under_or_overreaching" />
+
+                <RadioButton
+                    android:id="@+id/radioButton9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/another_medical_problem_unrelated_to_ms" />
+
+                <RadioButton
+                    android:id="@+id/radioButton10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/doing_something_risky" />
+
+                <RadioButton
+                    android:id="@+id/radioButton11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/weather_ice_rain_snow_or_wind" />
+
+                <RadioButton
+                    android:id="@+id/radioButton12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/poor_vision_didnt_see_an_obstacle" />
+
+                <RadioButton
+                    android:id="@+id/radioButton13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/felt_dizzy_or_faint" />
+
+                <RadioButton
+                    android:id="@+id/radioButton14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/overheated_too_hot" />
+
+                <RadioButton
+                    android:id="@+id/radioButton15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/fatigued" />
+
+                <RadioButton
+                    android:id="@+id/radioButton16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/other_please_give_details_below" />
+
+            </RadioGroup>
 
 
         </LinearLayout>
 
 
+
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>
