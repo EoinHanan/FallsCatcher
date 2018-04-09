@@ -3,31 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/customborder">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Injury suffered as a result of fall"
+        android:textColor="@color/colorWriting"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="368dp"
-        android:layout_height="468dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorWriting">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -36,7 +43,8 @@
             android:layout_column="0"
             android:layout_row="1"
             android:text="Bruises"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView4"
@@ -45,7 +53,8 @@
             android:layout_column="0"
             android:layout_row="2"
             android:text="Cuts/Scrapes"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -54,7 +63,8 @@
             android:layout_column="0"
             android:layout_row="3"
             android:text="Sprain/Strain"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView13"
@@ -62,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="4"
-            android:text="Dislocation" />
+            android:text="Dislocation"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView14"
@@ -70,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="5"
-            android:text="Broken Bone" />
+            android:text="Broken Bone"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView8"
@@ -79,7 +91,8 @@
             android:layout_column="1"
             android:layout_row="0"
             android:text="Head"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView9"
@@ -88,7 +101,8 @@
             android:layout_column="2"
             android:layout_row="0"
             android:text="Body"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView10"
@@ -97,7 +111,8 @@
             android:layout_column="3"
             android:layout_row="0"
             android:text="Arms"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
         <TextView
             android:id="@+id/textView11"
@@ -106,7 +121,8 @@
             android:layout_column="4"
             android:layout_row="0"
             android:text="Legs"
-            tools:padding="6dp" />
+            tools:padding="6dp"
+            android:textColor="@color/colorWriting"/>
 
 
         <RadioButton
@@ -285,16 +301,20 @@
             android:layout_row="5"
             android:gravity="center" />
 
-        <Button
-            android:id="@+id/selectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="6"
-            android:text="Select"
-            tools:layout_editor_absoluteX="215dp"
-            tools:layout_editor_absoluteY="0dp" />
-
 
     </GridLayout>
+
+    <Button
+        android:id="@+id/selectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        android:background="@drawable/basic_button"/>
+
 </android.support.constraint.ConstraintLayout>

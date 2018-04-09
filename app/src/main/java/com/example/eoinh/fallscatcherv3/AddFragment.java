@@ -121,7 +121,6 @@ public class AddFragment extends Fragment {
 //                    Toast.makeText(view.getContext(),"Date is " + date, Toast.LENGTH_SHORT).show();
                     Fall fall = new Fall(patientID, date, timeStatus, location,cause,time,injury,lengthOfLie, lengthStatus, medical,help,relapse,comment);
                     db.addFall(fall);
-                    Toast.makeText(view.getContext(),"Number of falls " + db.getFalls().size(), Toast.LENGTH_SHORT).show();
                     clearFall();
                     Toast.makeText(view.getContext(),"Fall Logged", Toast.LENGTH_SHORT).show();
 //                    Log.d("FallAdded",
@@ -219,7 +218,7 @@ public class AddFragment extends Fragment {
             public void onClick(View view) {
                 if (!buttonSelected[2]) {
                     timeStatus = "unknown";
-                    time = "unknown";
+                    time = "00:00:00";
 
                     selected[1] = true;
 

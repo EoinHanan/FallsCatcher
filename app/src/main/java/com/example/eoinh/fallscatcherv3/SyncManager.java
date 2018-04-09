@@ -1,6 +1,7 @@
 package com.example.eoinh.fallscatcherv3;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 public class SyncManager {
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
-    private static final String ROOT_URL = "http://178.62.220.209/CommunicationApi/v1/api.php?apicall=";
+    private static final String ROOT_URL = "http://178.62.220.209/FallsApi/v1/api.php?apicall=";
     private static final String URL_CREATE_FALL = ROOT_URL + "createFall";
     private static final String URL_READ_FALLS = ROOT_URL + "getFalls&patientID=";
     private static final String URL_UPDATE_FALL = ROOT_URL + "updateFall";
@@ -27,7 +28,7 @@ public class SyncManager {
 
     public void sync(){
         ArrayList<Fall> localNewFalls = databaseHandler.getFallsBySyncStatus(1);
-
+        Log.i("Falls","" + localNewFalls.size());
         for (Fall fall : localNewFalls) {
             createFall(fall);
         }
@@ -70,6 +71,21 @@ public class SyncManager {
         params.put("help", fall.getHelp());
         params.put("relapse", fall.getRelapse());
         params.put("comment", fall.getComment());
+
+        Log.i("fallID", "" + fall.getFallID());
+        Log.i("patientID", "" + fall.getPatientID());
+        Log.i("date", "" + fall.getDate());
+        Log.i("timeStatus", "" + fall.getTimeStatus());
+        Log.i("time", "" + fall.getTime());
+        Log.i("medical", "" + fall.getMedical());
+        Log.i("location", "" + fall.getLocation());
+        Log.i("cause", "" + fall.getCause());
+        Log.i("injury", "" + fall.getInjury());
+        Log.i("lengthOfLie", "" + fall.getLengthOfLie());
+        Log.i("lengthStatus", "" + fall.getLengthStatus());
+        Log.i("help", "" + fall.getHelp());
+        Log.i("relapse", "" + fall.getRelapse());
+        Log.i("comment", "" + fall.getComment());
 
         PerformNetworkRequest request = new PerformNetworkRequest(URL_CREATE_FALL, params, CODE_POST_REQUEST);
         request.execute();

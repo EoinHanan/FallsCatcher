@@ -8,41 +8,38 @@ package com.example.eoinh.fallscatcherv3;
 public class User {
     private String userName;
     private int userID;
-    private boolean notification;
-    private int notificationMinute;
-    private int notificationHour;
+    private String password;
+    private String notification;
 
 
-    public User(String userName, int userID){
+    public User(String userName, String password, int userID){
         this.userName = userName;
         this.userID = userID;
-        this.notification = false;
-        this.notificationMinute = -1;
-        this.notificationHour = -1;
+        this.notification = null;
+
     }
-    public User(String userName, int userID, boolean notification, int notificationMinute, int notificationHour){
+    public User(String userName, String password, int userID,
+                String notification){
         this.userName = userName;
+        this.password = password;
         this.userID = userID;
         this.notification = notification;
-        this.notificationMinute = notificationMinute;
-        this.notificationHour = notificationHour;
     }
 
 
     public String getUserName(){
         return userName;
     }
+    public String getPassword() {
+        return password;
+    }
 
     public int getUserID(){
         return userID;
     }
     public boolean isNotification(){
-        return notification;
+        return (notification != null);
     }
-    public int getNotificationMinute(){
-        return notificationMinute;
-    }
-    public int getNotificationHour(){
-        return notificationHour;
-    }
+    public String getNotification(){
+        return notification;}
 }

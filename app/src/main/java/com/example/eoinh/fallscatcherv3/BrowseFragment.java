@@ -70,7 +70,6 @@ public class BrowseFragment extends Fragment {
 
             TextView dateText = (TextView)view.findViewById(R.id.dateText);
             TextView timeText = (TextView)view.findViewById(R.id.timeText);
-            TextView commentText = (TextView)view.findViewById(R.id.commentText);
             TextView syncText = (TextView)view.findViewById(R.id.syncText);
             editButton = (Button) view.findViewById(R.id.editButton);
 
@@ -91,9 +90,14 @@ public class BrowseFragment extends Fragment {
             });
 
             dateText.setText(falls.get(i).getDate());
-            timeText.setText(falls.get(i).getTime());
-            commentText.setText(falls.get(i).getComment());
-            syncText.setText("" + falls.get(i).getSync());
+            if (falls.get(i).getTimeStatus().equals("unknown"))
+                timeText.setText("unknown");
+            else
+                timeText.setText(falls.get(i).getTime());
+            if (falls.get(i).getSync() == 0)
+                syncText.setText("Synced");
+            else
+                syncText.setText("Unsynced");
 
             return view;
         }

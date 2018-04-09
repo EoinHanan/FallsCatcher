@@ -33,8 +33,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Column_Sync= "sync";
 
     private static final String Table_User = "user";
-    //Patient ID already intialised
+    //Patient ID already initialised
     private static final String Column_UserName = "name";
+    private static final String Column_Password = "password";
     private static final String Column_Notification = "notification";
     private static final String Column_NotificationMinute = "notificationMinute";
     private static final String Column_NotificationHour = "notificationHour";
@@ -153,51 +154,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(Column_PatientID, user.getUserID());
         values.put(Column_UserName, user.getUserName());
         values.put(Column_Notification, user.isNotification());
-        values.put(Column_NotificationMinute, user.getNotificationMinute());
-        values.put(Column_NotificationHour, user.getNotificationHour());
+        values.put(Column_Notification, user.getNotification());
 
         sqLiteDatabase.update(Table_User, values,  Column_PatientID + "='"+user.getUserID() + "'", null);
     }
 
     public int getPatientID(){
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
-        String query = "SELECT COUNT (" +  Column_PatientID + ") FROM " + Table_User + " WHERE 1";
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-        cursor.moveToFirst();
-
-        int count= cursor.getInt(0);
-
-        if (count != 1) {
-            return -1;
-        }
-
-        query = "Select " + Column_PatientID + " from " + Table_Fall + " where 1";
-        cursor = sqLiteDatabase.rawQuery(query, null);
-        cursor.moveToFirst();
-
-        int ID = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
-
-        return ID;
-    }
-
-    public User getUser(){
-
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
-        String query = "Select * from " + Table_User + " where 1";
-        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-        cursor.moveToFirst();
-
-        String name = cursor.getString(cursor.getColumnIndex(Column_UserName));
-        int id = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
-        boolean notificaiton = (cursor.getString(cursor.getColumnIndex(Column_Notification))).contains("true");
-        int notificationMinute = cursor.getInt(cursor.getColumnIndex(Column_NotificationMinute));
-        int notificationHour = cursor.getInt(cursor.getColumnIndex(Column_NotificationHour));
-
-        User user = new User (name,id,notificaiton, notificationMinute, notificationHour);
-
-        return user;
+//        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+//
+//        String query = "SELECT COUNT (" +  Column_PatientID + ") FROM " + Table_User + " WHERE 1";
+//        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+//        cursor.moveToFirst();
+//
+//        int count= cursor.getInt(0);
+//
+//        if (count != 1) {
+//            return 1;
+//        }
+//
+//        query = "Select " + Column_PatientID + " from " + Table_Fall + " where 1";
+//        cursor = sqLiteDatabase.rawQuery(query, null);
+//        cursor.moveToFirst();
+//
+//        int ID = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
+//
+//        return ID;
+        return 1;
     }
 
     public ArrayList<Fall> getFalls(){
@@ -288,5 +270,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         String query = "UPDATE " + Table_Fall + " set " + Column_Sync + " = 0 WHERE " + Column_Sync + " = " + sync;
         sqLiteDatabase.execSQL(query);
+    }
+
+    public void setUser(User user){
+        //Set the user to be equal to input data.
+    }
+    public User getUser(){
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        String query = "Select * from " + Table_User + " where 1";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        String name = cursor.getString(cursor.getColumnIndex(Column_UserName));
+        int id = cursor.getInt(cursor.getColumnIndex(Column_PatientID));
+        String password = cursor.getString(cursor.getColumnIndex(Column_Password));
+        String notification = cursor.getString(cursor.getColumnIndex(Column_Notification));
+
+        User user = new User (name,password,id, notification);
+
+        return user;
+    }
+    public boolean checkLoggedIn(){
+        String countQuery = "SELECT  * FROM " + Table_User;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return (count==1);
+    }
+    public void logout(){
+        //Delete logged in user
     }
 }
